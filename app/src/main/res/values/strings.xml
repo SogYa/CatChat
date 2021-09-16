@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">RealTimeChat</string>
-    <string name="auth_activity_email_hint">Email address</string>
-    <string name="auth_activity_password_hint">Password</string>
-    <string name="auth_activity_login_button">Log In</string>
-    <string name="auth_activity_signin_button">Sign In</string>
+    <string name="auth_activity_email_hint">example@example.com</string>
+    <string name="auth_activity_password_hint">123456</string>
+    <string name="auth_activity_signin_button">Войти</string>
+    <string name="auth_activity_reg_button">Зарегистрироваться</string>
     <string name="login_activity_reg_hint">Всё ещё не зарегистрированы?</string>
-    <string name="login_activity_reg_buttom">Зарегистрироваться</string>
+    <string name="login_activity_reg_button">Зарегистрироваться</string>
+    <string name="registration_textview_email">Адрес электронной почты</string>
+    <string name="registration_textview_password">Пароль</string>
+    <string name="signin_password_recovery_button">Забыли пароль?</string>
 </resources>
