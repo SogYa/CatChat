@@ -16,7 +16,7 @@
         android:layout_marginBottom="8dp"
         android:layout_weight="1"
         android:onClick="onClickSignIn"
-        android:text="@string/auth_activity_signin_button"
+        android:text="@string/auth_activity_reg_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -36,6 +36,12 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.51">
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_textview_email" />
+
         <EditText
             android:id="@+id/editTextEmail"
             android:layout_width="match_parent"
@@ -46,6 +52,12 @@
             android:hint="@string/auth_activity_email_hint"
             android:inputType="textEmailAddress"
             android:minHeight="48dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/registration_textview_password" />
 
         <EditText
             android:id="@+id/editTextPassword"
