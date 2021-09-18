@@ -9,13 +9,13 @@
 
     <Button
         android:id="@+id/buttonGoToPasswordRecovery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:layout_width="172dp"
+        android:layout_height="42dp"
         android:background="#00FFFFFF"
         android:onClick="onClickGoToPasswordRecovery"
         android:text="@string/signin_password_recovery_button"
         android:textColor="@color/purple_700"
+        android:textSize="12sp"
         app:iconTint="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,9 +68,10 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint="@string/auth_activity_email_hint"
-            android:hintTextColor="#757575"
+
             android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#707070" />
 
         <TextView
             android:id="@+id/textView5"
@@ -106,13 +107,13 @@
 
     <Button
         android:id="@+id/buttonGoToRegistration"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
+        android:layout_width="189dp"
+        android:layout_height="37dp"
         android:background="#00FFFFFF"
         android:onClick="onClickGoToRegistration"
         android:text="@string/login_activity_reg_button"
         android:textColor="@color/purple_700"
+        android:textSize="12sp"
         app:iconTint="#00FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
         app:layout_constraintEnd_toEndOf="parent"
