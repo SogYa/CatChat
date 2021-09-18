@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealTimeChat">
         <activity
+            android:name=".SignInActivity"
+            android:exported="true" />
+        <activity
             android:name=".PasswordRecoveryActivity"
             android:exported="true" />
         <activity
@@ -19,7 +22,7 @@
             android:name=".MainActivity"
             android:exported="true" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
