@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#00FFFFFF"
-    tools:context=".SignInActivity">
+    tools:context=".LogInActivity">
 
     <Button
         android:id="@+id/buttonGoToPasswordRecovery"
         android:layout_width="172dp"
-        android:layout_height="42dp"
+        android:layout_height="50dp"
         android:background="#00FFFFFF"
         android:onClick="onClickGoToPasswordRecovery"
         android:text="@string/signin_password_recovery_button"
@@ -107,8 +107,8 @@
 
     <Button
         android:id="@+id/buttonGoToRegistration"
-        android:layout_width="189dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
         android:background="#00FFFFFF"
         android:onClick="onClickGoToRegistration"
         android:text="@string/login_activity_reg_button"
