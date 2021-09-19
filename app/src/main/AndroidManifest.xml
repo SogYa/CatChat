@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RealTimeChat">
         <activity
-            android:name=".SignInActivity"
+            android:name=".LogInActivity"
             android:exported="true" />
         <activity
             android:name=".PasswordRecoveryActivity"
