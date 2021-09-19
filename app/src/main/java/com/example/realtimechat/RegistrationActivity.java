@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -22,6 +23,8 @@ public class RegistrationActivity extends AppCompatActivity {
     private final String TAG = "AuthActivity";
     private String emailAddress,password;
     private EditText emailAddressEditText,passwordEditText;
+    public static final String APP_PREFERENCES_CHECK = "LogStatus";
+    SharedPreferences mSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +32,7 @@ public class RegistrationActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         emailAddressEditText = (EditText) findViewById(R.id.editTextEmail);
         passwordEditText = (EditText) findViewById(R.id.editTextPassword);
-
+        mSettings = getSharedPreferences(APP_PREFERENCES_CHECK,MODE_PRIVATE);
     }
 
     @Override
@@ -57,6 +60,9 @@ public class RegistrationActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Toast.makeText(getApplicationContext(), "Добро пожаловать!", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                SharedPreferences.Editor editor = mSettings.edit();
+                                editor.putBoolean(APP_PREFERENCES_CHECK,true);
+                                editor.apply();
                                 finish();
                             } else {
                                 Toast.makeText(getApplicationContext(), "Неккоректные данные / пользователь уже создан!", Toast.LENGTH_SHORT).show();

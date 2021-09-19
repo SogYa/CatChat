@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,7 +19,8 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText emailAddressEditText, passwordEditText;
     private String emailAddress, password;
-
+    public static final String APP_PREFERENCES_CHECK = "LogStatus";
+    private SharedPreferences mSettings;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,7 @@ public class SignInActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         emailAddressEditText = (EditText) findViewById(R.id.editTextEmail);
         passwordEditText = (EditText) findViewById(R.id.editTextPassword);
+        mSettings = getSharedPreferences(APP_PREFERENCES_CHECK,MODE_PRIVATE);
     }
 
     public void onClickGoToRegistration(View view) {
@@ -42,6 +45,9 @@ public class SignInActivity extends AppCompatActivity {
                     if(task.isSuccessful()) {
                         Toast.makeText(getApplicationContext(), "С возвращением!", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        SharedPreferences.Editor editor = mSettings.edit();
+                        editor.putBoolean(APP_PREFERENCES_CHECK,true);
+                        editor.apply();
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Неправильный логин или пароль!", Toast.LENGTH_SHORT).show();
