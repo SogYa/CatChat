@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
                             .setPositiveButton("Да", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
-                                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                                    startActivity(new Intent(MainActivity.this, LogInActivity.class));
                                     SharedPreferences.Editor editor = mSettings.edit();
                                     editor.putBoolean(APP_PREFERENCES_CHECK, false);
                                     editor.apply();
