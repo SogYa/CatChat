@@ -13,4 +13,10 @@
     <string name="passwordrecovery_send_mail">Отправить сообщение</string>
     <string name="version">ver 0.1.3</string>
     <string name="button_log_out">Выйти</string>
+    <string name="chat_message_hint">Сообщение</string>
+    <string name="button_change_password">Сменить пароль</string>
+    <string name="imageview_chat_avatar">ChatAvatar</string>
+    <string name="textview_name">Имя:</string>
+    <string name="textview_email">Email:</string>
+    <string name="imageview_useravatar">UserAvatar</string>
 </resources>
