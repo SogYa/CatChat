@@ -39,11 +39,13 @@ public class AuthRepo {
     }
 
     //Регистрация пользователя в FireBase
-    public void registration(@NonNull String email, @NonNull String password, DataListener<String> dataListener) {
+    public void registration(@NonNull String email, @NonNull String password,
+                             DataListener<String> dataListener) {
         fbAuthReference.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        dataListener.data(Objects.requireNonNull(task.getResult().getUser()).getUid());
+                        dataListener.data(Objects.requireNonNull(task.getResult().getUser())
+                                .getUid());
                     } else {
                         if (task.getException() != null) {
                             dataListener.error(task.getException().getMessage());
@@ -55,7 +57,8 @@ public class AuthRepo {
     }
 
     //Вход пользователя в FireBase
-    public void signIn(@NonNull String email, @NonNull String password, DataListener<String> dataListener) {
+    public void signIn(@NonNull String email, @NonNull String password,
+                       DataListener<String> dataListener) {
         fbAuthReference.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 dataListener.data(Objects.requireNonNull(task.getResult().getUser()).getUid());
@@ -125,12 +128,14 @@ public class AuthRepo {
     public void getMessages(DataListener<Message> dataListener) {
         Constants.PATH_TO_MESSAGES.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot,
+                                     @Nullable String previousChildName) {
                 dataListener.data(snapshot.getValue(Message.class));
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildChanged(@NonNull DataSnapshot snapshot,
+                                       @Nullable String previousChildName) {
 
             }
 
@@ -140,7 +145,8 @@ public class AuthRepo {
             }
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildMoved(@NonNull DataSnapshot snapshot,
+                                     @Nullable String previousChildName) {
 
             }
 
@@ -173,13 +179,13 @@ public class AuthRepo {
                     if (task.isSuccessful()) {
                         photoUrl = task.getResult().toString();
                         mDat.getReference().child(Constants.NODE_USERS)
-                                .child(Objects.requireNonNull(fbAuthReference.getCurrentUser()).getUid())
+                                .child(Objects.requireNonNull(fbAuthReference.
+                                        getCurrentUser()).getUid())
                                 .child(Constants.CHILD_PHOTO_URL)
                                 .setValue(photoUrl)
                                 .addOnCompleteListener(task1 -> Constants.USER.photoUrl = photoUrl);
                         dataListener.data(photoUrl);
-                    }
-                    else {
+                    } else {
                         if (task.getException() != null) {
                             dataListener.error(task.getException().getMessage());
                         } else {
@@ -189,15 +195,17 @@ public class AuthRepo {
                 });
     }
 
-    public void readAllUsers(DataListener<User> dataListener){
+    public void readAllUsers(DataListener<User> dataListener) {
         Constants.PATH_TO_USER.addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot,
+                                     @Nullable String previousChildName) {
                 dataListener.data(snapshot.getValue(User.class));
             }
 
             @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildChanged(@NonNull DataSnapshot snapshot,
+                                       @Nullable String previousChildName) {
 
             }
 
@@ -207,7 +215,8 @@ public class AuthRepo {
             }
 
             @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildMoved(@NonNull DataSnapshot snapshot,
+                                     @Nullable String previousChildName) {
 
             }
 
@@ -219,7 +228,8 @@ public class AuthRepo {
 
     }
 
-    public void updateUserName(String name){
-        Constants.PATH_TO_USER.child(Objects.requireNonNull(fbAuthReference.getCurrentUser()).getUid()).child("name").setValue(name);
+    public void updateUserName(String name) {
+        Constants.PATH_TO_USER.child(Objects.requireNonNull(fbAuthReference.getCurrentUser()).
+                getUid()).child("name").setValue(name);
     }
 }
