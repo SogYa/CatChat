@@ -11,7 +11,7 @@
     <string name="signin_password_recovery_button">Забыли пароль?</string>
     <string name="passwordrecovery_textview">Для востановления пароля введите почту привязанную к аккаунту. На нее будет выслано письмо с потверждением востановления пароля.</string>
     <string name="passwordrecovery_send_mail">Отправить сообщение</string>
-    <string name="version">ver 0.1.3</string>
+    <string name="version">ver 0.2.1</string>
     <string name="button_log_out">Выйти</string>
     <string name="chat_message_hint">Сообщение</string>
     <string name="button_change_password">Сменить пароль</string>
@@ -19,4 +19,14 @@
     <string name="textview_name">Имя:</string>
     <string name="textview_email">Email:</string>
     <string name="imageview_useravatar">UserAvatar</string>
+    <string name="auth_activity_text_view_name">Имя</string>
+    <string name="auth_activity_hint_name">Имя</string>
+    <string name="settings_text">Настройки</string>
+    <string name="about_chat_text">Пользователи</string>
+    <string name="avatar_sign_in">Фото профиля</string>
+    <string name="desc_avatar_sig_in">DefaultAvatar</string>
+    <string name="change_info">Редактировать профиль</string>
+    <string name="text_save">Сохранить</string>
+    <string name="text_cancel">Отмена</string>
+    <string name="user_info_cat">Котик</string>
 </resources>
