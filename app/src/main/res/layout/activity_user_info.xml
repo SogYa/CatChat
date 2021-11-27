@@ -88,7 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/textview_name"
-            android:textColor="#1FA810" />
+            android:textColor="#1FA810"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/textViewUserInfoName"
@@ -103,7 +104,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/textview_email"
-            android:textColor="#1FA810" />
+            android:textColor="#1FA810"
+            tools:ignore="TextContrastCheck" />
 
         <TextView
             android:id="@+id/textViewUserInfoEmail"
