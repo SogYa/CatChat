@@ -23,7 +23,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private UserProfileVM vm;
     private ConstraintLayout loadingLayout;
     private LinearLayout buttonsLayout;
-    private Button saveButton,cancelButton;
+    private Button saveButton, cancelButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,11 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        vm.updateAvatar(avatarImageView, aBoolean -> loadingLayout.setVisibility(View.GONE));
+        vm.updateAvatar(avatarImageView, aBoolean -> {});
         vm.getUserInfo().observe(this, user -> {
             userEmailEditText.setText(user.email);
             userNameEditText.setText(user.name);
+            loadingLayout.setVisibility(View.GONE);
         });
     }
 
@@ -77,7 +78,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void onClickSetImage(View view) {
-        vm.setImage(avatarImageView, this);
+        vm.setImage(this);
     }
 
     @Override
