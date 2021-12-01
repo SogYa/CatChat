@@ -12,20 +12,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.realtimechat.R;
 import com.example.realtimechat.datalayer.model.User;
+import com.example.realtimechat.instruments.Constants;
+import com.example.realtimechat.instruments.PhotoInstruments;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Objects;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
     private final LayoutInflater layoutInflater;
     private final List<User> users;
     private final OnUserClickListener onClickListener;
+    private final PhotoInstruments photoInstruments = new PhotoInstruments();
+
 
 
     interface OnUserClickListener {
         void onUserClick(User user, int position);
     }
 
-    public UsersAdapter(Context context, List<User> users,OnUserClickListener onClickListener ) {
+    public UsersAdapter(Context context, List<User> users, OnUserClickListener onClickListener) {
         this.layoutInflater = LayoutInflater.from(context);
         this.users = users;
         this.onClickListener = onClickListener;
@@ -41,10 +49,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull UsersAdapter.ViewHolder holder, int position) {
         User user = users.get(position);
+        Constants.PATH_TO_USER.child(user.uid).child("status").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                holder.userStatus.setText(Objects.requireNonNull(snapshot.getValue()).toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        photoInstruments.downloadAndSetImage(user.uid, holder.userAvatar);
         holder.userName.setText(user.getName());
-        holder.userStatus.setText(user.getStatus());
-        holder.userAvatar.setImageResource(R.mipmap.ic_deafault_avatar);
-        holder.itemView.setOnClickListener(view -> onClickListener.onUserClick(user,position));
+
+        holder.itemView.setOnClickListener(view -> onClickListener.onUserClick(user, position));
     }
 
     @Override
