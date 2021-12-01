@@ -23,17 +23,15 @@ public class Constants {
     public static final String APP_PREFS_IS_AVATAR_CREATED = "isCreated";
     public static final String CHANNEL_ID = "Message channel";
     public static final String NODE_USERS = "Users";
-    public static final String NODE_MESSAGES = "Messages";
     public static final String STORAGE_USER_IMAGE = "UsersAvatars";
     public static final String CHILD_PHOTO_URL = "photoUrl";
-    public static final String AVATAR_URI = "photoUri";
-    //public static String DEFAULT_AVATAR = "gs://realtimechat-7de91.appspot.com/UsersAvatars/kisspng-royalty-free-domestic-animal-lucky-cat-cartoon-5ae12e98552014.0393762415247069683487.png";
-
+    public static final String AVATAR_URI = "gs://realtimechat-7de91.appspot.com/UsersAvatars/kisspng-royalty-free-domestic-animal-lucky-cat-cartoon-5ae12e98552014.0393762415247069683487.png";
     public static final User USER = new User();
 
     private static final FirebaseAuth fbAuthReference = FirebaseAuth.getInstance();
 
     public static final FirebaseDatabase mDat = FirebaseDatabase.getInstance();
+
 
 
     public static final StorageReference STORAGE_PATH_TO_AVATARS = mStorage.getReference()
