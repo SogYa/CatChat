@@ -91,11 +91,12 @@ public class AuthRepo {
     }
 
     //Метод создание модели пользователя в базе данных
-    public void createNewUser(String name) {
+    public void createNewUser(String name, DataListener<String> dataListener) {
         String uid = Objects.requireNonNull(fbAuthReference.getCurrentUser()).getUid();
         String userEmail = fbAuthReference.getCurrentUser().getEmail();
         User user = new User(name, userEmail, uid, null);
         Constants.PATH_TO_USER.child(uid).setValue(user);
+        dataListener.data(user.uid);
     }
 
     //Создание модели сообщения в базе данных
@@ -158,7 +159,6 @@ public class AuthRepo {
     }
 
     public void sendImageToStorage(Uri uri, DataListener<Object> dataListener) {
-
         Constants.STORAGE_PATH_TO_AVATARS.putFile(uri).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 dataListener.data(uri);
@@ -169,6 +169,21 @@ public class AuthRepo {
                     dataListener.error(Constants.APP_ERROR_NETWORK_UNENABLE);
                 }
             }
+        });
+    }
+    public void setImage(String uid){
+//        Constants.PATH_TO_USER.child(uid).child("photoUrl").setValue(photoUrl);
+        Constants.STORAGE_PATH_TO_AVATAR
+                .child(uid).getDownloadUrl()
+                .addOnCompleteListener(task ->{
+                    if( task.isSuccessful()){
+                        String photoUrl1 = task.getResult().toString();
+                        mDat.getReference().child(Constants.NODE_USERS)
+                                .child(uid)
+                                .child(Constants.CHILD_PHOTO_URL)
+                                .setValue(photoUrl1)
+                                .addOnCompleteListener(task1 -> Constants.USER.photoUrl = photoUrl1);
+                    }
 
         });
     }
@@ -206,7 +221,6 @@ public class AuthRepo {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot,
                                        @Nullable String previousChildName) {
-
             }
 
             @Override
