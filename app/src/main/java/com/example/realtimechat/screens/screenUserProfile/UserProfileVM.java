@@ -13,11 +13,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.bumptech.glide.Glide;
 import com.example.realtimechat.R;
-import com.example.realtimechat.app.App;
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.datalayer.model.User;
+import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
+import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
 import com.example.realtimechat.screens.screenSignIn.SignInActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,14 +30,14 @@ public class UserProfileVM extends AndroidViewModel {
     private final AuthRepo authRepo;
     private final FirebaseAuth mAuth;
     private final MutableLiveData<User> userInfo;
-    private final App app;
+    private final PhotoInstruments photoInstruments;
 
     public UserProfileVM(@NonNull Application application) {
         super(application);
         userInfo = new MutableLiveData<>();
         mAuth = FirebaseAuth.getInstance();
         authRepo = new AuthRepo();
-        app = new App();
+        photoInstruments = new PhotoInstruments();
     }
 
     //Метод получения ифнормации о пользователе
@@ -51,7 +52,9 @@ public class UserProfileVM extends AndroidViewModel {
     public void logOut() {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, false);
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, false);
+        SPControl.getInstance().updatePrefs(Constants.AVATAR_URI,"");
         authRepo.logOut();
+        AppStatements.sendOffline();
         getApplication().startActivity(new Intent(getApplication(), SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 
@@ -71,8 +74,8 @@ public class UserProfileVM extends AndroidViewModel {
     }
 
     //Метод обрезки фото
-    public void setImage(ImageView imageView, Activity o) {
-        app.setImage(imageView, o);
+    public void setImage(Activity activity) {
+        photoInstruments.setImage(activity);
     }
 
     //Метод отправки сообщения в хранилище
@@ -95,7 +98,7 @@ public class UserProfileVM extends AndroidViewModel {
     public void updateAvatar(ImageView imageView, myCallBack<Boolean> myCallBack) {
         authRepo.downloadImage(Constants.STORAGE_PATH_TO_AVATARS, uriString ->
                 Glide.with(getApplication().getApplicationContext())
-                        .load(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)))
+                        .load(uriString)
                         .placeholder(R.mipmap.ic_deafault_avatar)
                         .into(imageView));
         myCallBack.data(true);
