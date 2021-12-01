@@ -11,22 +11,22 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.bumptech.glide.Glide;
-import com.example.realtimechat.app.App;
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.Constants;
+import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
 import com.example.realtimechat.screens.screenChat.MainActivity;
 
 public class RegistrationVM extends AndroidViewModel {
 
     private final AuthRepo authRepo;
-    private final App app;
+    private final PhotoInstruments photoInstruments;
 
     public RegistrationVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
-        app = new App();
+        photoInstruments = new PhotoInstruments();
     }
 
     //Метод регистрации пользователя
@@ -34,7 +34,18 @@ public class RegistrationVM extends AndroidViewModel {
         authRepo.registration(email, password, new AuthRepo.DataListener<String>() {
             @Override
             public void data(String o) {
-                authRepo.createNewUser(name);
+                authRepo.createNewUser(name, s -> authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
+                        new AuthRepo.DataListener<Object>() {
+                            @Override
+                            public void data(Object o) {
+                                authRepo.setImage(s);
+                            }
+
+                            @Override
+                            public void error(String error) {
+                                Toast.makeText(getApplication(), error, Toast.LENGTH_SHORT).show();
+                            }
+                        }));
                 SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, true);
                 SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
                 getApplication().startActivity(new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
@@ -49,9 +60,8 @@ public class RegistrationVM extends AndroidViewModel {
         });
     }
 
-    public void setAvatar(ImageView avatarView, Activity o) {
-        app.setImage(avatarView, o);
-
+    public void setAvatar(Activity activity) {
+        photoInstruments.setImage(activity);
     }
 
     public void sendImage(Uri uri, ImageView imageView) {
