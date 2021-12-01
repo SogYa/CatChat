@@ -3,19 +3,20 @@ package com.example.realtimechat.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
+import com.example.realtimechat.datalayer.datamanager.RxData;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
+import com.example.realtimechat.instruments.MyLifecycle;
+import com.example.realtimechat.instruments.myCallBack;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -26,27 +27,19 @@ public class App extends Application implements Application.ActivityLifecycleCal
     private static App app;
 
 
-    public void setImage(ImageView imageView, Activity o) {
-        CropImage.activity()
-                .setAspectRatio(1, 1)
-                .setRequestedSize(150, 150)
-                .setCropShape(CropImageView.CropShape.OVAL)
-                .start(o);
-    }
-
     //pickImageFrom
 
-//    public static MyLifecycle.AppState getAppState() {
-//        return RxData.appStateBehaviorRelay.getValue();
-//    }
+    public static MyLifecycle.AppState getAppState() {
+        return RxData.appStateBehaviorRelay.getValue();
+    }
 
     public static Context getAppContext() {
         return app.getApplicationContext();
     }
 
-//    public static Activity getActivity() {
-//        return RxData.activityBehaviorRelay.getValue();
-//    }
+    public static Activity getActivity() {
+        return RxData.activityBehaviorRelay.getValue();
+    }
 
 
     @Override
@@ -54,19 +47,16 @@ public class App extends Application implements Application.ActivityLifecycleCal
         super.onCreate();
 
         app = this;
-//        ProcessLifecycleOwner.get().getLifecycle().addObserver(
-//            new MyLifecycle(ProcessLifecycleOwner.get().getLifecycle(), new MyLifecycle.MyLifecycleListener() {
-//                @Override
-//                public void newState(MyLifecycle.AppState appState) {
-//                    RxData.appStateBehaviorRelay.accept(appState);
-//                }
-//            }));
-
-//        SoLoader.init(this, false);
-//        Realm.init(this);
-//        Fresco.initialize(this);
-//
-//        RxPaparazzo.register(this);
+        ProcessLifecycleOwner.get().getLifecycle().addObserver(
+                new MyLifecycle(ProcessLifecycleOwner.get().getLifecycle(), appState -> {
+                    RxData.appStateBehaviorRelay.accept(appState);
+                    if (SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_AUTH)) {
+                        if (appState.event.getTargetState().isAtLeast(Lifecycle.State.RESUMED)) {
+                            AppStatements.sendOnline();
+                        } else if (appState.event.getTargetState().isAtLeast(Lifecycle.State.DESTROYED))
+                            AppStatements.sendOffline();
+                    }
+                }));
     }
 
     @Override
@@ -80,13 +70,13 @@ public class App extends Application implements Application.ActivityLifecycleCal
 
     @Override
     public void onActivityResumed(@NonNull Activity activity) {
-       AppStatements.sendOnline();
+        // AppStatements.sendOnline();
 
     }
 
     @Override
     public void onActivityPaused(@NonNull Activity activity) {
-        AppStatements.sendOffline();
+        // AppStatements.sendOffline();
     }
 
     @Override
