@@ -11,8 +11,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.realtimechat.R;
-import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.instruments.Constants;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -53,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void onClickSetAvatar(View view) {
-        vm.setAvatar(avatarView, this);
+        vm.setAvatar(this);
     }
 
     @Override
