@@ -30,7 +30,6 @@ public class UserInfoVM extends AndroidViewModel {
             myCallBack.data(true);
             userInfo.postValue(value);
         });
-
     }
 
     public MutableLiveData<User> getUserInfo() {
