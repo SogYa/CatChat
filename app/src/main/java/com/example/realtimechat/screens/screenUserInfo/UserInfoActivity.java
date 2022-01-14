@@ -14,7 +14,7 @@ import com.example.realtimechat.R;
 public class UserInfoActivity extends AppCompatActivity {
     private UserInfoVM vm;
     private ImageView imageViewAvatar;
-    private TextView userNameTextView, userEmailTextView, userHeaderTextView;
+    private TextView userNameTextView, userEmailTextView, userOnlineTextView;
     private ConstraintLayout loadingLayout;
     private Bundle arguments;
 
@@ -26,7 +26,7 @@ public class UserInfoActivity extends AppCompatActivity {
         imageViewAvatar = findViewById(R.id.imageViewUserIAvatar);
         userNameTextView = findViewById(R.id.textViewUserInfoName);
         userEmailTextView = findViewById(R.id.textViewUserInfoEmail);
-        userHeaderTextView = findViewById(R.id.textViewHeaderName);
+        userOnlineTextView = findViewById(R.id.textViewUserOnline);
         loadingLayout = findViewById(R.id.loadingLayout);
         arguments = getIntent().getExtras();
 
@@ -44,7 +44,7 @@ public class UserInfoActivity extends AppCompatActivity {
         vm.getUserInfo().observe(this, user -> {
             userEmailTextView.setText(user.email);
             userNameTextView.setText(user.name);
-            userHeaderTextView.setText(user.name);
+            userOnlineTextView.setText(user.status);
         });
 
     }
