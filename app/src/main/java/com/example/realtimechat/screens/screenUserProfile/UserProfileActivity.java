@@ -1,8 +1,10 @@
 package com.example.realtimechat.screens.screenUserProfile;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,6 +16,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.realtimechat.R;
+import com.example.realtimechat.datalayer.datamanager.RxData;
+import com.example.realtimechat.instruments.ImnstrumentsAlertDialog;
+import com.example.realtimechat.instruments.myCallBack;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -28,6 +33,7 @@ public class UserProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RxData.activityBehaviorRelay.accept(this);
         setContentView(R.layout.activity_user_profile);
 
         userNameEditText = findViewById(R.id.editTextUserName);
@@ -49,9 +55,17 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        RxData.activityBehaviorRelay.accept(this);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
-        vm.updateAvatar(avatarImageView, aBoolean -> {});
+        RxData.activityBehaviorRelay.accept(this);
+        vm.updateAvatar(avatarImageView, aBoolean -> {
+        });
         vm.getUserInfo().observe(this, user -> {
             userEmailEditText.setText(user.email);
             userNameEditText.setText(user.name);
@@ -60,17 +74,7 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void onClickLogOut(View view) {
-        runOnUiThread(() -> {
-            if (!isFinishing()) {
-                new AlertDialog.Builder(UserProfileActivity.this)
-                        .setTitle("Выход из аккаунта")
-                        .setMessage("Вы уверены, что хотите выйти из аккаунта?")
-                        .setPositiveButton("Да", (dialogInterface, i) -> vm.logOut())
-                        .setNegativeButton("Нет", (dialogInterface, i) -> dialogInterface.cancel())
-                        .setIcon(R.drawable.ic_baseline_warning)
-                        .show();
-            }
-        });
+        vm.logOutDialog();
     }
 
     public void onClickChangePassword(View view) {
@@ -95,22 +99,14 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void onClickSave(View view) {
-        runOnUiThread(() -> {
-            if (!isFinishing()) {
-                new AlertDialog.Builder(UserProfileActivity.this)
-                        .setTitle("Сохранение изменений")
-                        .setMessage("Вы уверены, что хотите сохранить изменения?")
-                        .setPositiveButton("Да", (dialogInterface, i) -> {
-                            buttonsLayout.setVisibility(View.VISIBLE);
-                            saveButton.setVisibility(View.GONE);
-                            cancelButton.setVisibility(View.GONE);
-                            avatarImageView.setClickable(false);
-                            userNameEditText.setEnabled(false);
-                            vm.saveNewData(userNameEditText.getText().toString());
-                        })
-                        .setNegativeButton("Нет", (dialogInterface, i) -> dialogInterface.cancel())
-                        .setIcon(R.drawable.ic_baseline_warning)
-                        .show();
+        vm.saveButton(aBoolean -> {
+            if (aBoolean) {
+                buttonsLayout.setVisibility(View.VISIBLE);
+                saveButton.setVisibility(View.GONE);
+                cancelButton.setVisibility(View.GONE);
+                avatarImageView.setClickable(false);
+                userNameEditText.setEnabled(false);
+                vm.saveNewData(userNameEditText.getText().toString());
             }
         });
     }
@@ -119,7 +115,6 @@ public class UserProfileActivity extends AppCompatActivity {
         buttonsLayout.setVisibility(View.GONE);
         saveButton.setVisibility(View.VISIBLE);
         cancelButton.setVisibility(View.VISIBLE);
-
         avatarImageView.setClickable(true);
         userNameEditText.setEnabled(true);
     }

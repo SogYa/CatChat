@@ -1,9 +1,13 @@
 package com.example.realtimechat.screens.screenUserProfile;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Application;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -18,6 +22,7 @@ import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.datalayer.model.User;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
+import com.example.realtimechat.instruments.ImnstrumentsAlertDialog;
 import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
 import com.example.realtimechat.screens.screenSignIn.SignInActivity;
@@ -32,12 +37,14 @@ public class UserProfileVM extends AndroidViewModel {
     private final MutableLiveData<User> userInfo;
     private final PhotoInstruments photoInstruments;
 
+
     public UserProfileVM(@NonNull Application application) {
         super(application);
         userInfo = new MutableLiveData<>();
         mAuth = FirebaseAuth.getInstance();
         authRepo = new AuthRepo();
         photoInstruments = new PhotoInstruments();
+
     }
 
     //Метод получения ифнормации о пользователе
@@ -51,10 +58,10 @@ public class UserProfileVM extends AndroidViewModel {
     //Метод выхода из аккаунта
     public void logOut() {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, false);
-        SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, false);
-        SPControl.getInstance().updatePrefs(Constants.AVATAR_URI,"");
+        SPControl.getInstance().updatePrefs(Constants.AVATAR_URI, "");
         authRepo.logOut();
         AppStatements.sendOffline();
+        SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, "");
         getApplication().startActivity(new Intent(getApplication(), SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 
@@ -96,7 +103,7 @@ public class UserProfileVM extends AndroidViewModel {
 
     //Метод обновления аватара
     public void updateAvatar(ImageView imageView, myCallBack<Boolean> myCallBack) {
-        authRepo.downloadImage(Constants.STORAGE_PATH_TO_AVATARS, uriString ->
+        authRepo.downloadImage(Constants.STORAGE_PATH_TO_AVATAR, uriString ->
                 Glide.with(getApplication().getApplicationContext())
                         .load(uriString)
                         .placeholder(R.mipmap.ic_deafault_avatar)
@@ -109,12 +116,35 @@ public class UserProfileVM extends AndroidViewModel {
         authRepo.updateUserName(name);
     }
 
-    public String checkName(String name) {
+    public void checkName(String name) {
         if (SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_NAME).equals(name)) {
-            return name;
         } else {
-            return SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_NAME);
+            SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_NAME);
         }
+    }
+
+    //Диалог для сохранения изменений
+    public void saveButton(myCallBack<Boolean> myCallBack) {
+        ImnstrumentsAlertDialog.showDialogTwoButtons("Сохранение изменений",
+                "Вы уверены, что хотите сохранить изменения?",
+                "Да",
+                "Нет",
+                //Positive buttonClickListener
+                (dialogInterface, i) -> myCallBack.data(true),
+                //Negative buttonClickListener
+                (dialogInterface, i) -> dialogInterface.cancel());
+    }
+
+    //Диалог для выхода из аккаунта
+    public void logOutDialog() {
+        ImnstrumentsAlertDialog.showDialogTwoButtons("Выход",
+                "Вы уверены, что хотите выйти?",
+                "Да",
+                "Нет",
+                //Positive buttonClickListener
+                (dialogInterface, i) -> logOut(),
+                //Negative buttonClickListener
+                (dialogInterface, i) -> dialogInterface.cancel());
     }
 
     public MutableLiveData<User> getUserInfo() {
