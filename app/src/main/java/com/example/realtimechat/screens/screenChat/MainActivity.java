@@ -63,9 +63,4 @@ public class MainActivity extends AppCompatActivity {
         vm.sendMessage(messageEditText.getText().toString());
         messageEditText.setText("");
     }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }
