@@ -28,22 +28,13 @@ public class Constants {
     public static final String AVATAR_URI = "gs://realtimechat-7de91.appspot.com/UsersAvatars/kisspng-royalty-free-domestic-animal-lucky-cat-cartoon-5ae12e98552014.0393762415247069683487.png";
     public static final User USER = new User();
 
-    private static final FirebaseAuth fbAuthReference = FirebaseAuth.getInstance();
 
     public static final FirebaseDatabase mDat = FirebaseDatabase.getInstance();
-
-
-
-    public static final StorageReference STORAGE_PATH_TO_AVATARS = mStorage.getReference()
-            .child(Constants.STORAGE_USER_IMAGE)
-            .child(Objects.requireNonNull(fbAuthReference.getCurrentUser()).getUid());
     public static final StorageReference STORAGE_PATH_TO_AVATAR = mStorage.getReference()
             .child(Constants.STORAGE_USER_IMAGE);
 
     public static final DatabaseReference PATH_TO_USER = mDat.getReference().child("Users");
     public static final DatabaseReference PATH_TO_MESSAGES = mDat.getReference().child("Messages");
-    public static final DatabaseReference PATH_TO_USER_STATUS = mDat.getReference().child("Users").child(fbAuthReference.getCurrentUser().getUid()).child("status");
-
 
 
 //    //метод для получения максимальной ширины экрана
