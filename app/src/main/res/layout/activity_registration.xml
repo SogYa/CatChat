@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".screens.screenRegistration.RegistrationActivity">
 
     <Button
@@ -125,13 +126,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageSignInAvatar"
             android:layout_width="150dp"
             android:layout_height="150dp"
             app:srcCompat="@mipmap/ic_deafault_avatar"
             android:contentDescription="@string/desc_avatar_sig_in"
-            android:onClick="onClickSetAvatar"/>
+            android:onClick="onClickSetAvatar"
+            app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView"
+            />
 
         <TextView
             android:id="@+id/textChangeAvatar"

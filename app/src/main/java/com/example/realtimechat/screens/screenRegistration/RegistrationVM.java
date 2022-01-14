@@ -30,34 +30,50 @@ public class RegistrationVM extends AndroidViewModel {
     }
 
     //Метод регистрации пользователя
-    public void registration(String name, String email, String password, myCallBack<Object> myCallBack) {
-        authRepo.registration(email, password, new AuthRepo.DataListener<String>() {
-            @Override
-            public void data(String o) {
-                authRepo.createNewUser(name, s -> authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
-                        new AuthRepo.DataListener<Object>() {
-                            @Override
-                            public void data(Object o) {
-                                authRepo.setImage(s);
-                            }
+    public void registration(String name, String email, String password,
+                             myCallBack<Object> myCallBack) {
+        if (name.isEmpty() || email.isEmpty() || password.isEmpty()
+                || !SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_AVATAR_CREATED)) {
+            Toast.makeText(getApplication(), "Ой-ой, вы что-то не заполнили(", Toast.LENGTH_SHORT).show();
+            myCallBack.data(true);
+        } else {
+            authRepo.registration(email, password, new AuthRepo.DataListener<String>() {
+                @Override
+                public void data(String o) {
+                    authRepo.createNewUser(name, s -> {
+                        authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
+                                new AuthRepo.DataListener<Object>() {
+                                    @Override
+                                    public void data(Object o) {
+                                        authRepo.setImage(s);
+                                    }
 
-                            @Override
-                            public void error(String error) {
-                                Toast.makeText(getApplication(), error, Toast.LENGTH_SHORT).show();
-                            }
-                        }));
-                SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, true);
-                SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
-                getApplication().startActivity(new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                Toast.makeText(getApplication(), "Добро пожаловать!", Toast.LENGTH_SHORT).show();
-            }
+                                    @Override
+                                    public void error(String error) {
+                                        Toast.makeText(getApplication(), error,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    });
+                    SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, true);
+                    SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
+                    SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, false);
+                    getApplication().startActivity(new Intent(getApplication(),
+                            MainActivity.class)
+                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    Toast.makeText(getApplication(), "Добро пожаловать!",
+                            Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void error(String error) {
-                myCallBack.data(true);
-                Toast.makeText(getApplication(), error, Toast.LENGTH_SHORT).show();
-            }
-        });
+                }
+
+                @Override
+                public void error(String error) {
+                    myCallBack.data(true);
+                    Toast.makeText(getApplication(), error, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     public void setAvatar(Activity activity) {
@@ -65,6 +81,7 @@ public class RegistrationVM extends AndroidViewModel {
     }
 
     public void sendImage(Uri uri, ImageView imageView) {
+        SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, true);
         SPControl.getInstance().updatePrefs(Constants.AVATAR_URI, uri.toString());
         Glide.with(getApplication().getApplicationContext())
                 .load(uri)
