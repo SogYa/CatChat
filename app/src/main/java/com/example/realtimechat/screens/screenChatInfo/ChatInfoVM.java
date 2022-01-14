@@ -39,6 +39,5 @@ public class ChatInfoVM extends AndroidViewModel {
             Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(1);
             myCallBack.data(true);
         });
-
     }
 }
