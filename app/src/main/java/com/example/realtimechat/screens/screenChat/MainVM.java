@@ -11,14 +11,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.realtimechat.R;
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
@@ -28,7 +26,6 @@ import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.myCallBack;
 import com.example.realtimechat.screens.screenChatInfo.ChatInfoActivity;
 import com.example.realtimechat.screens.screenUserProfile.UserProfileActivity;
-
 import java.time.Clock;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -49,15 +46,15 @@ public class MainVM extends AndroidViewModel {
         AppStatements.sendOnline();
         authRepo = new AuthRepo();
         uid = SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_ID);
-        authRepo.readUserFromDataBase(uid, user -> userName = user.name);
+        if(SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_AUTH)){
+            authRepo.readUserFromDataBase(uid, user -> userName = user.name);
+        }
         notificationManager = (NotificationManager) getApplication().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
-
     }
 
     //Инициализация RecyclerView
     @RequiresApi(api = Build.VERSION_CODES.S)
     public void initRecyclerView(RecyclerView recyclerView, myCallBack<Boolean> myCallBack) {
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
         linearLayoutManager.setStackFromEnd(true);
 
