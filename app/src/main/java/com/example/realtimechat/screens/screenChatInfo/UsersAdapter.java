@@ -61,7 +61,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         });
         photoInstruments.downloadAndSetImage(user.uid, holder.userAvatar);
         holder.userName.setText(user.getName());
-
         holder.itemView.setOnClickListener(view -> onClickListener.onUserClick(user, position));
     }
 
@@ -77,7 +76,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            userAvatar = itemView.findViewById(R.id.imageViewUserAvatar);
+            userAvatar = itemView.findViewById(R.id.circleImageViewAvatar);
             userName = itemView.findViewById(R.id.textViewUserName);
             userStatus = itemView.findViewById(R.id.textViewUserStatus);
         }
