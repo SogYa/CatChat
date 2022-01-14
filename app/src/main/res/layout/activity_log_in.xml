@@ -5,6 +5,7 @@
     android:id="@+id/signInLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".screens.screenSignIn.SignInActivity">
 
     <LinearLayout
@@ -59,6 +60,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:foregroundGravity="center"
@@ -68,8 +70,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.00999999">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_activity_reg_hint"
+            android:textSize="16sp" />
 
         <Button
             android:id="@+id/buttonGoToRegistration"
@@ -93,19 +102,6 @@
             android:textSize="12sp"
             app:iconTint="#00FFFFFF" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login_activity_reg_hint"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonLogIn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/frameLayout"
@@ -134,6 +130,17 @@
             app:strokeWidth="0.1sp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ImageView
+        android:id="@+id/imageCatSignIn"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_icon_round" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loading"
         android:layout_width="match_parent"
@@ -161,16 +168,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/imageCatSignIn"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_icon_round" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
