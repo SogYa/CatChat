@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ShapeAppearance.App.CircleImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!--<item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>-->
+        <!--<item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>-->
+    </style>
+</resources>
