@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".screens.screenChatInfo.ChatInfoActivity">
 
     <LinearLayout
@@ -56,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayoutUserProfile" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loadingLayout"
+        android:id="@+id/loadingLayoutUsers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
@@ -67,8 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="invisible">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ProgressBar
             android:id="@+id/progressBarUserInfo"
