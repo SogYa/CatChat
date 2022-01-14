@@ -20,7 +20,7 @@ public class ChatInfoActivity extends AppCompatActivity {
 
         ChatInfoVM vm = new ViewModelProvider(this).get(ChatInfoVM.class);
         RecyclerView recyclerView = findViewById(R.id.usersRecyclerView);
-        loadingLayout = findViewById(R.id.loadingLayout);
+        loadingLayout = findViewById(R.id.loadingLayoutUsers);
 
         vm.initRecyclerView(recyclerView, aBoolean -> loadingLayout.setVisibility(View.GONE));
     }
