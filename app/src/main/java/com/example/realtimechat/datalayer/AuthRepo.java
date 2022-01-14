@@ -159,7 +159,7 @@ public class AuthRepo {
     }
 
     public void sendImageToStorage(Uri uri, DataListener<Object> dataListener) {
-        Constants.STORAGE_PATH_TO_AVATARS.putFile(uri).addOnCompleteListener(task -> {
+        Constants.STORAGE_PATH_TO_AVATAR.child(Objects.requireNonNull(fbAuthReference.getCurrentUser()).getUid()).putFile(uri).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 dataListener.data(uri);
             } else {
@@ -189,7 +189,7 @@ public class AuthRepo {
     }
 
     public void downloadImage(StorageReference path, DataListener<String> dataListener) {
-        path.getDownloadUrl()
+        path.child(Objects.requireNonNull(fbAuthReference.getCurrentUser()).getUid()).getDownloadUrl()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         photoUrl = task.getResult().toString();
