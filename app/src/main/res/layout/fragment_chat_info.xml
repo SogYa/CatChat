@@ -8,7 +8,7 @@
     tools:context=".screens.screenChatInfo.ChatInfoActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayoutUserProfile"
+        android:id="@+id/TopBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/text_border_bottom"
@@ -54,7 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayoutUserProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/TopBar" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/loadingLayoutUsers"

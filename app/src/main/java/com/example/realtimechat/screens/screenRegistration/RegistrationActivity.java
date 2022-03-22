@@ -51,7 +51,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void onClickSetAvatar(View view) {
-        vm.setAvatar(this);
+        //vm.setAvatar(this);
     }
 
     @Override

@@ -12,7 +12,7 @@ import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenChat.MainActivity;
+import com.example.realtimechat.screens.screenChat.ChatActivity;
 import com.example.realtimechat.screens.screenPasswordRecovery.PasswordRecoveryActivity;
 import com.example.realtimechat.screens.screenRegistration.RegistrationActivity;
 
@@ -50,7 +50,7 @@ public class SignInVM extends AndroidViewModel {
                         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
                         myCallBack.data(true);
                         Toast.makeText(getApplication(), "С вовзращением!", Toast.LENGTH_SHORT).show();
-                        getApplication().startActivity(new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        getApplication().startActivity(new Intent(getApplication(), ChatActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     }
 
                     @Override

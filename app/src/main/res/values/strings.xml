@@ -30,4 +30,7 @@
     <string name="text_cancel">Отмена</string>
     <string name="user_info_cat">Котик</string>
     <string name="desc_logo">logo</string>
+    <string name="menu_item_feed">Лента</string>
+    <string name="menu_item_chat">Чат</string>
+    <string name="menu_item_user">Профиль</string>
 </resources>

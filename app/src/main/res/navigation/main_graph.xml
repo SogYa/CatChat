@@ -1,38 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_graph"
-    app:startDestination="@id/startActivity">
 
-    <activity
-        android:id="@+id/startActivity"
-        android:name="com.example.realtimechat.screens.screenStart.StartActivity"
-        android:label="activity_start"
-        tools:layout="@layout/activity_start" />
-    <activity
-        android:id="@+id/signInActivity"
-        android:name="com.example.realtimechat.screens.screenSignIn.SignInActivity"
-        android:label="activity_sign_in"
-        tools:layout="@layout/activity_sign_in" />
-    <activity
-        android:id="@+id/registrationActivity"
-        android:name="com.example.realtimechat.screens.screenRegistration.RegistrationActivity"
-        android:label="activity_registration"
-        tools:layout="@layout/activity_registration" />
-    <activity
-        android:id="@+id/mainActivity"
-        android:name="com.example.realtimechat.screens.screenChat.MainActivity"
-        android:label="activity_main"
-        tools:layout="@layout/activity_main" />
-    <activity
-        android:id="@+id/passwordRecoveryActivity"
-        android:name="com.example.realtimechat.screens.screenPasswordRecovery.PasswordRecoveryActivity"
-        android:label="activity_password_recovery"
-        tools:layout="@layout/activity_password_recovery" />
-    <activity
-        android:id="@+id/userProfileActivity"
-        android:name="com.example.realtimechat.screens.screenUserProfile.UserProfileActivity"
-        android:label="activity_user_profile"
-        tools:layout="@layout/activity_user_profile" />
+    android:id="@+id/main_graph"
+    app:startDestination="@id/chatFragment2">
+    <fragment
+        android:id="@+id/chatFragment2"
+        android:name="com.example.realtimechat.screens.screenChat.ChatFragment"
+        android:label="ChatFragment" >
+        <action
+            android:id="@+id/action_chatFragment2_to_userProfileFragment2"
+            app:destination="@id/userProfileFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/userProfileFragment2"
+        android:name="com.example.realtimechat.screens.screenUserProfile.UserProfileFragment"
+        android:label="UserProfileFragment" />
 </navigation>

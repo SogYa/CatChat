@@ -3,6 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/activity_main.xml" value="0.25271739130434784" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/activity_start.xml" value="0.36231884057971014" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/activity_user_profile.xml" value="0.2015625" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/fragment_chat.xml" value="0.33" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/fragment_chat_info.xml" value="0.36231884057971014" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/fragment_user_profile.xml" value="0.36231884057971014" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/layout/list_item.xml" value="0.36231884057971014" />
+        <entry key="..\:/CatChatNEW/app/src/main/res/menu/bottom_nav_menu.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/Ghost/AndroidStudioProjects/RealTimeChat/app/src/main/res/drawable-hdpi/receiver_message_style.xml" value="0.2703125" />
         <entry key="..\:/Users/Ghost/AndroidStudioProjects/RealTimeChat/app/src/main/res/drawable-hdpi/reciver_message_style.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Ghost/AndroidStudioProjects/RealTimeChat/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />

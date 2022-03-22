@@ -12,18 +12,17 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.realtimechat.R;
-import com.example.realtimechat.instruments.Constants;
 
-public class MainActivity extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
     private EditText messageEditText;
-    private MainVM vm;
+    private ChatVM vm;
     private ConstraintLayout loadingLayout;
 
     @RequiresApi(api = Build.VERSION_CODES.S)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_chat);
 
         //Настройка RecyclerView
         RecyclerView recyclerView = findViewById(R.id.chatRecyclerView);
@@ -32,9 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
         messageEditText = findViewById(R.id.editTextMessage);
 
-        System.out.println(Constants.APP_PREFS_USER_ID);
-
-        vm = new ViewModelProvider(this).get(MainVM.class);
+        vm = new ViewModelProvider(this).get(ChatVM.class);
         vm.initRecyclerView(recyclerView, aBoolean -> loadingLayout.setVisibility(View.GONE));
     }
 

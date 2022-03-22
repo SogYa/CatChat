@@ -1,24 +1,21 @@
 package com.example.realtimechat.screens.screenUserProfile;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.realtimechat.R;
 import com.example.realtimechat.datalayer.datamanager.RxData;
-import com.example.realtimechat.instruments.ImnstrumentsAlertDialog;
-import com.example.realtimechat.instruments.myCallBack;
 import com.theartofdev.edmodo.cropper.CropImage;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -34,7 +31,7 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         RxData.activityBehaviorRelay.accept(this);
-        setContentView(R.layout.activity_user_profile);
+        setContentView(R.layout.fragment_user_profile);
 
         userNameEditText = findViewById(R.id.editTextUserName);
         userEmailEditText = findViewById(R.id.editTextUserEmail);
@@ -81,8 +78,9 @@ public class UserProfileActivity extends AppCompatActivity {
         vm.passwordChange();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public void onClickSetImage(View view) {
-        vm.setImage(this);
+        //vm.setImage(this);
     }
 
     @Override

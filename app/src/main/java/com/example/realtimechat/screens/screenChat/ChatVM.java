@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MainVM extends AndroidViewModel {
+public class ChatVM extends AndroidViewModel {
     private final AuthRepo authRepo;
     private final String uid;
     private final NotificationManager notificationManager;
@@ -41,7 +41,7 @@ public class MainVM extends AndroidViewModel {
     private final ArrayList<Message> mListMessages = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public MainVM(@NonNull Application application) {
+    public ChatVM(@NonNull Application application) {
         super(application);
         AppStatements.sendOnline();
         authRepo = new AuthRepo();
@@ -63,7 +63,7 @@ public class MainVM extends AndroidViewModel {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        Intent intent = new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(getApplication(), ChatActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, intent, PendingIntent.FLAG_MUTABLE);
 
         //Получение сообщений из базы данных

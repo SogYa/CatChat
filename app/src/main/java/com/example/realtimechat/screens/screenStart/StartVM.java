@@ -10,8 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.realtimechat.MainActivity;
 import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.screens.screenChat.MainActivity;
+import com.example.realtimechat.screens.screenChat.ChatActivity;
 import com.example.realtimechat.screens.screenSignIn.SignInActivity;
 
 public class StartVM extends AndroidViewModel {

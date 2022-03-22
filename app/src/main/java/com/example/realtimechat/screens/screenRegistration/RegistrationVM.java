@@ -16,7 +16,7 @@ import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenChat.MainActivity;
+import com.example.realtimechat.screens.screenChat.ChatActivity;
 
 public class RegistrationVM extends AndroidViewModel {
 
@@ -59,7 +59,7 @@ public class RegistrationVM extends AndroidViewModel {
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, false);
                     getApplication().startActivity(new Intent(getApplication(),
-                            MainActivity.class)
+                            ChatActivity.class)
                             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
                                     | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                     Toast.makeText(getApplication(), "Добро пожаловать!",
@@ -76,9 +76,9 @@ public class RegistrationVM extends AndroidViewModel {
         }
     }
 
-    public void setAvatar(Activity activity) {
-        photoInstruments.setImage(activity);
-    }
+//    public void setAvatar(Activity activity) {
+//        photoInstruments.setImage(activity);
+//    }
 
     public void sendImage(Uri uri, ImageView imageView) {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, true);
