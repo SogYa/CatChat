@@ -1,20 +1,12 @@
 package com.example.realtimechat.screens.screenUserProfile;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Application;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
@@ -38,7 +30,6 @@ public class UserProfileVM extends AndroidViewModel {
     private final AuthRepo authRepo;
     private final FirebaseAuth mAuth;
     private final MutableLiveData<User> userInfo;
-    private final PhotoInstruments photoInstruments;
 
 
     public UserProfileVM(@NonNull Application application) {
@@ -46,7 +37,7 @@ public class UserProfileVM extends AndroidViewModel {
         userInfo = new MutableLiveData<>();
         mAuth = FirebaseAuth.getInstance();
         authRepo = new AuthRepo();
-        photoInstruments = new PhotoInstruments();
+        PhotoInstruments photoInstruments = new PhotoInstruments();
 
     }
 
@@ -81,12 +72,6 @@ public class UserProfileVM extends AndroidViewModel {
                 Toast.makeText(getApplication(), error, Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    //Метод обрезки фото
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setImage(Fragment fragment) {
-        photoInstruments.setImage(fragment.getActivity());
     }
 
     //Метод отправки сообщения в хранилище
