@@ -21,7 +21,13 @@
         android:theme="@style/Theme.RealTimeChat" >
         <activity
             android:name=".MainActivity"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".screens.screenUserInfo.UserInfoActivity"
             android:exported="true" />
@@ -34,28 +40,6 @@
         <activity
             android:name=".screens.screenUserProfile.UserProfileActivity"
             android:exported="true" />
-        <activity
-            android:name=".screens.screenSignIn.SignInActivity"
-            android:exported="true" />
-        <activity
-            android:name=".screens.screenPasswordRecovery.PasswordRecoveryActivity"
-            android:exported="true" />
-        <activity
-            android:name=".screens.screenRegistration.RegistrationActivity"
-            android:exported="true" />
-        <activity
-            android:name=".screens.screenChat.ChatActivity"
-            android:exported="true" />
-        <activity
-            android:name=".screens.screenStart.StartActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
