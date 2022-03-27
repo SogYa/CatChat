@@ -3,6 +3,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-android'
 }
+apply plugin: 'kotlin-android'
 
 android {
     compileSdk 31
@@ -66,4 +67,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation 'com.google.android.material:material:<version>'
     api 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
