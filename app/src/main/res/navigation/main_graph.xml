@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
     android:id="@+id/main_graph"
-    app:startDestination="@id/chatFragment2">
+    app:startDestination="@id/splashScreenFragment">
     <fragment
         android:id="@+id/chatFragment2"
         android:name="com.example.realtimechat.screens.screenChat.ChatFragment"
-        android:label="ChatFragment" >
+        android:label="ChatFragment">
         <action
             android:id="@+id/action_chatFragment2_to_userProfileFragment2"
             app:destination="@id/userProfileFragment2" />
@@ -15,5 +15,60 @@
     <fragment
         android:id="@+id/userProfileFragment2"
         android:name="com.example.realtimechat.screens.screenUserProfile.UserProfileFragment"
-        android:label="UserProfileFragment" />
+        android:label="UserProfileFragment">
+        <action
+            android:id="@+id/action_userProfileFragment2_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.realtimechat.screens.screenStart.StartFragment"
+        android:label="SplashScreenFragment">
+        <action
+            android:id="@+id/action_splashScreenFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2"
+            app:popUpTo="@id/main_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/main_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.realtimechat.screens.screenSignIn.SignInFragment"
+        android:label="SignInFragment">
+        <action
+            android:id="@+id/action_signInFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+        <action
+            android:id="@+id/action_signInFragment_to_passwordRecoveryFragment"
+            app:destination="@id/passwordRecoveryFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordRecoveryFragment"
+        android:name="com.example.realtimechat.screens.screenPasswordRecovery.PasswordRecoveryFragment"
+        android:label="PasswordRecoveryFragment">
+        <action
+            android:id="@+id/action_passwordRecoveryFragment_to_signInFragment"
+            app:destination="@id/signInFragment"
+            app:popUpTo="@id/passwordRecoveryFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.example.realtimechat.screens.screenRegistration.RegistrationFragment"
+        android:label="RegistrationFragment">
+        <action
+            android:id="@+id/action_registrationFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+    </fragment>
 </navigation>
