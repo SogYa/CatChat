@@ -12,6 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/text_border_bottom"
         android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,12 +22,12 @@
 
         <Button
             android:id="@+id/topBarBackButton"
-            android:visibility="gone"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="5dp"
             android:layout_weight="0"
             android:background="#00FFFFFF"
+            android:visibility="gone"
             app:icon="@drawable/ic_baseline_arrow_back_24"
             app:iconGravity="textStart"
             app:iconSize="32sp"
