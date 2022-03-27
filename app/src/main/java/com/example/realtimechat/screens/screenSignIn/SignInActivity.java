@@ -20,7 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
+        setContentView(R.layout.fragment_log_in);
 
         vm = new ViewModelProvider(this).get(SignInVM.class);
 

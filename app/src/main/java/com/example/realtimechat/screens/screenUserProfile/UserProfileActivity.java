@@ -36,7 +36,7 @@ public class UserProfileActivity extends AppCompatActivity {
         userNameEditText = findViewById(R.id.editTextUserName);
         userEmailEditText = findViewById(R.id.editTextUserEmail);
 
-        loadingLayout = findViewById(R.id.signInLayout);
+        loadingLayout = findViewById(R.id.loadingSignIn);
         buttonsLayout = findViewById(R.id.linearLayoutButtons);
 
         saveButton = findViewById(R.id.buttonSave);
