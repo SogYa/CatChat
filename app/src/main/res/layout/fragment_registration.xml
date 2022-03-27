@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".screens.screenRegistration.RegistrationActivity">
+    android:fitsSystemWindows="true">
 
     <Button
         android:id="@+id/buttonGoBack2"
@@ -14,7 +13,6 @@
         android:layout_margin="5dp"
         android:layout_weight="0"
         android:background="#00FFFFFF"
-        android:onClick="onClickGoBack"
         app:icon="@drawable/ic_baseline_arrow_back_24"
         app:iconGravity="textStart"
         app:iconSize="34sp"
@@ -44,7 +42,6 @@
             android:layout_margin="8dp"
             android:layout_weight="0"
             android:backgroundTint="#FFFFFF"
-            android:onClick="onClickSignIn"
             android:text="@string/auth_activity_reg_button"
             android:textColor="#1FA810"
             app:strokeColor="#A1A1A1" />
@@ -132,7 +129,6 @@
             android:layout_height="150dp"
             app:srcCompat="@mipmap/ic_deafault_avatar"
             android:contentDescription="@string/desc_avatar_sig_in"
-            android:onClick="onClickSetAvatar"
             app:shapeAppearance="@style/ShapeAppearance.App.CircleImageView"
             />
 
