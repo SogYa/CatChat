@@ -12,16 +12,19 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.realtimechat.MainActivity;
 import com.example.realtimechat.datalayer.SPControl;
+import com.example.realtimechat.instruments.NavigationConstants;
 import com.example.realtimechat.screens.screenChat.ChatActivity;
 import com.example.realtimechat.screens.screenSignIn.SignInActivity;
 
 public class StartVM extends AndroidViewModel {
 
     private final MutableLiveData<String> hintsData;
+    private final MutableLiveData<NavigationConstants> navigationLiveData;
 
     public StartVM(@NonNull Application application) {
         super(application);
         hintsData = new MutableLiveData<>();
+        navigationLiveData = new MutableLiveData<>();
         String[] hints = new String[]{
                 "Котика на логотипе зовут Марик",
                 "Лиля - самая милая кошка",
@@ -32,7 +35,8 @@ public class StartVM extends AndroidViewModel {
                 "Что такое красота? Дом, где два кота",
                 "Запускаем мурчало"
         };
-        hintsData.setValue(hints[(int) (Math.random()*7)]);
+        hintsData.setValue(hints[(int) (Math.random() * 7)]);
+         checkStatus();
     }
 
     public void checkStatus() {
@@ -41,9 +45,9 @@ public class StartVM extends AndroidViewModel {
         handler.postDelayed(() -> {
             //Проверка на авторизацию пользователя
             if (SPControl.getInstance().getBoolPrefs(APP_PREFS_IS_AUTH)) {
-                getApplication().getApplicationContext().startActivity(new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                navigationLiveData.postValue(NavigationConstants.CHAT);
             } else {
-                getApplication().getApplicationContext().startActivity(new Intent(getApplication(), SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                navigationLiveData.postValue(NavigationConstants.LOGIN);
             }
         }, 1500);
     }
@@ -51,6 +55,7 @@ public class StartVM extends AndroidViewModel {
     public MutableLiveData<String> getHintsData() {
         return hintsData;
     }
+    public MutableLiveData<NavigationConstants> getNavigationLiveData(){return navigationLiveData;}
 }
 
 
