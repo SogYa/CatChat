@@ -27,14 +27,4 @@ public class PhotoInstruments {
                 .into(imageView));
         return null;
     }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    public void setImage(Activity activity) {
-        CropImage.activity()
-                .setAspectRatio(1, 1)
-                .setRequestedSize(600, 600)
-                .setCropShape(CropImageView.CropShape.OVAL)
-                .start(activity);
-
-    }
 }
