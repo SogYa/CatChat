@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.bumptech.glide.Glide;
@@ -58,13 +61,9 @@ public class RegistrationVM extends AndroidViewModel {
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, true);
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, false);
-                    getApplication().startActivity(new Intent(getApplication(),
-                            ChatActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    myCallBack.data("Success");
                     Toast.makeText(getApplication(), "Добро пожаловать!",
                             Toast.LENGTH_SHORT).show();
-
                 }
 
                 @Override
@@ -75,10 +74,6 @@ public class RegistrationVM extends AndroidViewModel {
             });
         }
     }
-
-//    public void setAvatar(Activity activity) {
-//        photoInstruments.setImage(activity);
-//    }
 
     public void sendImage(Uri uri, ImageView imageView) {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, true);
