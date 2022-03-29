@@ -18,7 +18,7 @@ import com.example.realtimechat.databinding.FragmentRegistrationBinding
 import com.example.realtimechat.instruments.MyActivityResultContract
 
 class RegistrationFragment : Fragment(R.layout.fragment_registration) {
-    private lateinit var vm: RegistrationVM
+    private lateinit var vm: RegistrationAVM
     private lateinit var binding: FragmentRegistrationBinding
     private lateinit var avatarImage: ImageView
     private lateinit var cropActivityResultLauncher: ActivityResultLauncher<Any?>
@@ -35,7 +35,7 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm = ViewModelProvider(this).get(RegistrationVM::class.java)
+        vm = ViewModelProvider(this).get(RegistrationAVM::class.java)
         avatarImage = view.findViewById(R.id.imageSignInAvatar)
         binding.buttonSignIn.setOnClickListener {
             binding.loading.visibility = View.VISIBLE
@@ -62,7 +62,8 @@ class RegistrationFragment : Fragment(R.layout.fragment_registration) {
             findNavController().popBackStack()
         }
         cropActivityResultLauncher = registerForActivityResult(cropActivityContract) {
-            vm.sendImage(it, binding.imageSignInAvatar)
+            if (it != null)
+                vm.sendImage(it, binding.imageSignInAvatar)
         }
     }
 }
