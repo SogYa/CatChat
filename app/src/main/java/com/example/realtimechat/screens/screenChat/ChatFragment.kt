@@ -17,7 +17,7 @@ import com.example.realtimechat.databinding.FragmentChatBinding
 
 class ChatFragment : Fragment(R.layout.fragment_chat) {
     private lateinit var messageEditText: EditText
-    private lateinit var vm: ChatVM
+    private lateinit var vm: ChatAVM
     private lateinit var loadingLayout: ConstraintLayout
     private lateinit var recyclerView: RecyclerView
     private lateinit var binding: FragmentChatBinding
@@ -30,7 +30,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         loadingLayout = view.findViewById(R.id.loading)
         messageEditText = view.findViewById(R.id.editTextMessage)
 
-        vm = ViewModelProvider(this).get(ChatVM::class.java)
+        vm = ViewModelProvider(this).get(ChatAVM::class.java)
         vm.initRecyclerView(recyclerView) {
             loadingLayout.visibility = View.GONE
         }
@@ -39,7 +39,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
             findNavController().navigate(R.id.action_chatFragment2_to_userProfileFragment2)
         }
         binding.chatInfoBar.setOnClickListener {
-            vm.goToChatInfo()
+            findNavController().navigate(R.id.action_chatFragment2_to_chatInfoFragment)
         }
         binding.buttonSendMessage.setOnClickListener {
             vm.sendMessage(messageEditText.text.toString())
