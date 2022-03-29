@@ -17,6 +17,8 @@ import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.realtimechat.MainActivity;
 import com.example.realtimechat.R;
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
@@ -24,8 +26,7 @@ import com.example.realtimechat.datalayer.model.Message;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenChatInfo.ChatInfoActivity;
-import com.example.realtimechat.screens.screenUserProfile.UserProfileActivity;
+
 import java.time.Clock;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -33,7 +34,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ChatVM extends AndroidViewModel {
+public class ChatAVM extends AndroidViewModel {
     private final AuthRepo authRepo;
     private final String uid;
     private final NotificationManager notificationManager;
@@ -41,7 +42,7 @@ public class ChatVM extends AndroidViewModel {
     private final ArrayList<Message> mListMessages = new ArrayList<>();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public ChatVM(@NonNull Application application) {
+    public ChatAVM(@NonNull Application application) {
         super(application);
         AppStatements.sendOnline();
         authRepo = new AuthRepo();
@@ -63,7 +64,7 @@ public class ChatVM extends AndroidViewModel {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        Intent intent = new Intent(getApplication(), ChatActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, intent, PendingIntent.FLAG_MUTABLE);
 
         //Получение сообщений из базы данных
@@ -121,13 +122,7 @@ public class ChatVM extends AndroidViewModel {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_ACTIVE, isActive);
     }
 
-    public void goToSettings() {
-        getApplication().startActivity(new Intent(getApplication(), UserProfileActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-    }
 
-    public void goToChatInfo() {
-        getApplication().startActivity(new Intent(getApplication(), ChatInfoActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
-    }
 
     public static void createChannelIfNeeded(NotificationManager manager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
