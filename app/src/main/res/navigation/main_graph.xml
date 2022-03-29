@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_chatFragment2_to_userProfileFragment2"
             app:destination="@id/userProfileFragment2" />
+        <action
+            android:id="@+id/action_chatFragment2_to_chatInfoFragment"
+            app:destination="@id/chatInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment2"
@@ -19,6 +22,9 @@
         <action
             android:id="@+id/action_userProfileFragment2_to_signInFragment"
             app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_userProfileFragment2_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -56,9 +62,7 @@
         android:label="PasswordRecoveryFragment">
         <action
             android:id="@+id/action_passwordRecoveryFragment_to_signInFragment"
-            app:destination="@id/signInFragment"
-            app:popUpTo="@id/passwordRecoveryFragment"
-            app:popUpToInclusive="true" />
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -70,5 +74,24 @@
         <action
             android:id="@+id/action_registrationFragment_to_chatFragment2"
             app:destination="@id/chatFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatInfoFragment"
+        android:name="com.example.realtimechat.screens.screenChatInfo.ChatInfoFragment"
+        android:label="ChatInfoFragment" >
+        <action
+            android:id="@+id/action_chatInfoFragment_to_userInfoFragment"
+            app:destination="@id/userInfoFragment" />
+        <action
+            android:id="@+id/action_chatInfoFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/userInfoFragment"
+        android:name="com.example.realtimechat.screens.screenUserInfo.UserInfoFragment"
+        android:label="UserInfoFragment" >
+        <action
+            android:id="@+id/action_userInfoFragment_to_chatInfoFragment"
+            app:destination="@id/chatInfoFragment" />
     </fragment>
 </navigation>
