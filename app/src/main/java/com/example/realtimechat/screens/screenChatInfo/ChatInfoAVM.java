@@ -19,14 +19,14 @@ import java.util.Objects;
 public class ChatInfoAVM extends AndroidViewModel {
     private final ArrayList<User> mListUsers = new ArrayList<>();
     private final AuthRepo authRepo;
+
     public ChatInfoAVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
     }
 
-    public void initRecyclerView(RecyclerView recyclerView,  myCallBack<Object> myCallBack){
+    public void initRecyclerView(RecyclerView recyclerView, myCallBack<Object> myCallBack) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
-
         UsersAdapter adapter = new UsersAdapter(getApplication(), mListUsers, (user, position) -> {
             Bundle bundle = new Bundle();
             bundle.putString("uid", user.getUid());
@@ -42,5 +42,9 @@ public class ChatInfoAVM extends AndroidViewModel {
             Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(1);
             myCallBack.data(true);
         });
+    }
+
+    public void clearRecyclerView() {
+        mListUsers.clear();
     }
 }
