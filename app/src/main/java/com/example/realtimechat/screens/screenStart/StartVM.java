@@ -2,27 +2,20 @@ package com.example.realtimechat.screens.screenStart;
 
 import static com.example.realtimechat.instruments.Constants.APP_PREFS_IS_AUTH;
 
-import android.app.Application;
-import android.content.Intent;
 import android.os.Handler;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
-import com.example.realtimechat.MainActivity;
 import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.NavigationConstants;
-import com.example.realtimechat.screens.screenChat.ChatActivity;
-import com.example.realtimechat.screens.screenSignIn.SignInActivity;
 
-public class StartVM extends AndroidViewModel {
+public class StartVM extends ViewModel {
 
     private final MutableLiveData<String> hintsData;
     private final MutableLiveData<NavigationConstants> navigationLiveData;
 
-    public StartVM(@NonNull Application application) {
-        super(application);
+    public StartVM() {
         hintsData = new MutableLiveData<>();
         navigationLiveData = new MutableLiveData<>();
         String[] hints = new String[]{
