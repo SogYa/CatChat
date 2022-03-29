@@ -15,7 +15,7 @@ import com.example.realtimechat.databinding.FragmentLogInBinding
 class SignInFragment : Fragment(R.layout.fragment_log_in) {
 
     private lateinit var binding: FragmentLogInBinding
-    private lateinit var vm: SignInVM
+    private lateinit var vm: SignInAVM
 
     //    private var isInclusive:Boole an
     override fun onCreateView(
@@ -30,7 +30,7 @@ class SignInFragment : Fragment(R.layout.fragment_log_in) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm = ViewModelProvider(this).get(SignInVM::class.java)
+        vm = ViewModelProvider(this).get(SignInAVM::class.java)
         binding.buttonGoToRegistration.setOnClickListener {
 
         }

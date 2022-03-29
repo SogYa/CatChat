@@ -12,7 +12,7 @@ import com.example.realtimechat.databinding.FragmentPasswordRecoveryBinding
 
 class PasswordRecoveryFragment : Fragment(R.layout.fragment_password_recovery) {
     private lateinit var binding: FragmentPasswordRecoveryBinding
-    private lateinit var vm:PasswordRecoveryVM
+    private lateinit var vm: PasswordRecoveryAVM
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +25,7 @@ class PasswordRecoveryFragment : Fragment(R.layout.fragment_password_recovery) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm = ViewModelProvider(this).get(PasswordRecoveryVM::class.java)
+        vm = ViewModelProvider(this).get(PasswordRecoveryAVM::class.java)
         binding.button.setOnClickListener{
             vm.passwordRecovery(binding.editTextEmailAddressRec.text.toString())
         }
