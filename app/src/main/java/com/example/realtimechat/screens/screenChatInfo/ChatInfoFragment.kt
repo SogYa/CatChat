@@ -40,4 +40,8 @@ class ChatInfoFragment : Fragment(R.layout.fragment_chat_info) {
             findNavController().popBackStack()
         }
     }
+    override fun onPause() {
+        super.onPause()
+        vm.clearRecyclerView()
+    }
 }
