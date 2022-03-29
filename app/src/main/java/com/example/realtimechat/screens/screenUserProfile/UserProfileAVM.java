@@ -1,7 +1,6 @@
 package com.example.realtimechat.screens.screenUserProfile;
 
 import android.app.Application;
-import android.content.Intent;
 import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -20,19 +19,18 @@ import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.ImnstrumentsAlertDialog;
 import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenSignIn.SignInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Objects;
 
-public class UserProfileVM extends AndroidViewModel {
+public class UserProfileAVM extends AndroidViewModel {
 
     private final AuthRepo authRepo;
     private final FirebaseAuth mAuth;
     private final MutableLiveData<User> userInfo;
 
 
-    public UserProfileVM(@NonNull Application application) {
+    public UserProfileAVM(@NonNull Application application) {
         super(application);
         userInfo = new MutableLiveData<>();
         mAuth = FirebaseAuth.getInstance();
@@ -56,7 +54,7 @@ public class UserProfileVM extends AndroidViewModel {
         authRepo.logOut();
         AppStatements.sendOffline();
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, "");
-        getApplication().startActivity(new Intent(getApplication(), SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+
     }
 
     //Метод востановки пароля
@@ -125,15 +123,21 @@ public class UserProfileVM extends AndroidViewModel {
     }
 
     //Диалог для выхода из аккаунта
-    public void logOutDialog() {
+    public void logOutDialog(myCallBack<Boolean> myCallBack) {
         ImnstrumentsAlertDialog.showDialogTwoButtons("Выход",
                 "Вы уверены, что хотите выйти?",
                 "Да",
                 "Нет",
                 //Positive buttonClickListener
-                (dialogInterface, i) -> logOut(),
+                (dialogInterface, i) -> {
+                    logOut();
+                    myCallBack.data(true);
+                },
                 //Negative buttonClickListener
-                (dialogInterface, i) -> dialogInterface.cancel());
+                (dialogInterface, i) -> {
+                    dialogInterface.cancel();
+                    myCallBack.data(false);
+                });
     }
 
     public MutableLiveData<User> getUserInfo() {
