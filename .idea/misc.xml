@@ -48,11 +48,14 @@
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/activity_log_in.xml" value="0.20018115942028986" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/activity_main.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_chat.xml" value="0.18414387031408308" />
+        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_chat_info.xml" value="0.1697061803444782" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_log_in.xml" value="0.16077898550724637" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_password_recovery.xml" value="0.5" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_registration.xml" value="0.18414387031408308" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_start.xml" value="0.21331521739130435" />
+        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_user_info.xml" value="0.15932117527862208" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_user_profile.xml" value="0.1" />
+        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/users_list_item.xml" value="0.128125" />
       </map>
     </option>
   </component>
