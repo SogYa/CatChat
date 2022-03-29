@@ -31,8 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        navController.enableOnBackPressed(true)
-        navController.popBackStack()
+        supportFragmentManager.popBackStack()
     }
 
 }
