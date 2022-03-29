@@ -9,9 +9,11 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import com.example.realtimechat.R
 import com.example.realtimechat.databinding.FragmentUserProfileBinding
 import com.example.realtimechat.datalayer.datamanager.RxData
@@ -20,7 +22,7 @@ import com.example.realtimechat.instruments.MyActivityResultContract
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     private lateinit var binding: FragmentUserProfileBinding
-    private lateinit var vm: UserProfileVM
+    private lateinit var avm: UserProfileAVM
     private lateinit var cropActivityResultLauncher: ActivityResultLauncher<Any?>
     private val cropActivityContract: MyActivityResultContract = MyActivityResultContract()
 
@@ -41,14 +43,24 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
         binding.editTextUserName.isEnabled = false
         binding.loadingSignIn.visibility = VISIBLE
 
-        vm = ViewModelProvider(this).get(UserProfileVM::class.java)
-        vm.checkUser()
+        avm = ViewModelProvider(this).get(UserProfileAVM::class.java)
+        avm.checkUser()
 
         binding.buttonQuit.setOnClickListener {
-            vm.logOutDialog()
+            avm.logOutDialog {
+                if (it) {
+                    findNavController().navigate(R.id.action_userProfileFragment2_to_signInFragment,
+                        bundleOf(), navOptions {
+                            launchSingleTop = true
+                            popUpTo(R.id.main_graph) {
+                                inclusive = true
+                            }
+                        })
+                }
+            }
         }
         binding.buttonChangePassword.setOnClickListener {
-            vm.passwordChange()
+            avm.passwordChange()
         }
         binding.imageViewAvatar.setOnClickListener {
             cropActivityResultLauncher.launch(null)
@@ -61,7 +73,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             binding.editTextUserName.isEnabled = true
         }
         binding.buttonCancel.setOnClickListener {
-            vm.checkName(binding.editTextUserName.text.toString())
+            avm.checkName(binding.editTextUserName.text.toString())
             binding.linearLayoutButtons.visibility = VISIBLE
             binding.buttonSave.visibility = GONE
             binding.buttonCancel.visibility = GONE
@@ -72,7 +84,7 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             findNavController().popBackStack()
         }
         cropActivityResultLauncher = registerForActivityResult(cropActivityContract) {
-            vm.sendImage(it, binding.imageViewAvatar)
+            avm.sendImage(it, binding.imageViewAvatar)
         }
     }
 
@@ -84,8 +96,8 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
     override fun onResume() {
         super.onResume()
         RxData.activityBehaviorRelay.accept(this.requireActivity())
-        vm.updateAvatar(binding.imageViewAvatar) { }
-        vm.userInfo.observe(this) { user: User ->
+        avm.updateAvatar(binding.imageViewAvatar) { }
+        avm.userInfo.observe(this) { user: User ->
             binding.editTextUserEmail.setText(user.email)
             binding.editTextUserName.setText(user.name)
             binding.loadingSignIn.visibility = GONE
