@@ -14,13 +14,13 @@ import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.myCallBack;
 
-public class SignInVM extends AndroidViewModel {
+public class SignInAVM extends AndroidViewModel {
 
     private final AuthRepo authRepo;
     private int count = 0;
     private final MutableLiveData<Integer> navigationLiveData;
 
-    public SignInVM(@NonNull Application application) {
+    public SignInAVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
         navigationLiveData = new MutableLiveData<>();
