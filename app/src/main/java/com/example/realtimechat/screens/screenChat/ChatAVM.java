@@ -11,12 +11,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.realtimechat.MainActivity;
 import com.example.realtimechat.R;
@@ -25,14 +25,12 @@ import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.datalayer.model.Message;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
-import com.example.realtimechat.instruments.myCallBack;
 
 import java.time.Clock;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class ChatAVM extends AndroidViewModel {
     private final AuthRepo authRepo;
@@ -40,40 +38,34 @@ public class ChatAVM extends AndroidViewModel {
     private final NotificationManager notificationManager;
     private String userName;
     private final ArrayList<Message> mListMessages = new ArrayList<>();
+    private Message lastMessage;
+    private final MutableLiveData<ArrayList<Message>> messageMutableLiveData;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public ChatAVM(@NonNull Application application) {
         super(application);
         AppStatements.sendOnline();
         authRepo = new AuthRepo();
+        messageMutableLiveData = new MutableLiveData<>();
         uid = SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_ID);
-        if(SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_AUTH)){
+        if (SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_AUTH)) {
             authRepo.readUserFromDataBase(uid, user -> userName = user.name);
         }
+        initList();
         notificationManager = (NotificationManager) getApplication().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
     }
 
-    //Инициализация RecyclerView
-    @RequiresApi(api = Build.VERSION_CODES.S)
-    public void initRecyclerView(RecyclerView recyclerView, myCallBack<Boolean> myCallBack) {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
-        linearLayoutManager.setStackFromEnd(true);
-
-        MessageAdapter adapter = new MessageAdapter(getApplication(), mListMessages);
-
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(linearLayoutManager);
-
+    //Инициализация списка сообщений
+    public void initList() {
         Intent intent = new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, intent, PendingIntent.FLAG_MUTABLE);
-
         //Получение сообщений из базы данных
         authRepo.getMessages(new AuthRepo.DataListener<Message>() {
             @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void data(Message message) {
                 mListMessages.add(message);
-                recyclerView.smoothScrollToPosition(adapter.getItemCount() - 1);
+                //Настройка уведомлений
                 if (!SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_ACTIVE)
                         && !message.getUid().equals(SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_ID))) {
                     NotificationCompat.Builder notificationBuilder =
@@ -89,10 +81,8 @@ public class ChatAVM extends AndroidViewModel {
                     createChannelIfNeeded(notificationManager);
                     notificationManager.notify(Constants.NOTIFY_ID, notificationBuilder.build());
                 }
-                Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(1);
-                myCallBack.data(true);
+                messageMutableLiveData.postValue(mListMessages);
             }
-
             @Override
             public void error(String error) {
                 Toast.makeText(getApplication(), error, Toast.LENGTH_SHORT).show();
@@ -122,12 +112,14 @@ public class ChatAVM extends AndroidViewModel {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_ACTIVE, isActive);
     }
 
-
-
     public static void createChannelIfNeeded(NotificationManager manager) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel(Constants.CHANNEL_ID, Constants.CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
             manager.createNotificationChannel(notificationChannel);
         }
+    }
+
+    public MutableLiveData<ArrayList<Message>> getMessageMutableLiveData() {
+        return messageMutableLiveData;
     }
 }
