@@ -10,10 +10,14 @@
         android:label="ChatFragment">
         <action
             android:id="@+id/action_chatFragment2_to_userProfileFragment2"
-            app:destination="@id/userProfileFragment2" />
+            app:destination="@id/userProfileFragment2"
+            app:enterAnim="@anim/from_right"
+            app:popEnterAnim="@anim/from_left" />
         <action
             android:id="@+id/action_chatFragment2_to_chatInfoFragment"
-            app:destination="@id/chatInfoFragment" />
+            app:destination="@id/chatInfoFragment"
+            app:enterAnim="@anim/from_top"
+            app:popEnterAnim="@anim/from_bottom" />
     </fragment>
     <fragment
         android:id="@+id/userProfileFragment2"
@@ -50,10 +54,14 @@
             app:destination="@id/chatFragment2" />
         <action
             android:id="@+id/action_signInFragment_to_passwordRecoveryFragment"
-            app:destination="@id/passwordRecoveryFragment" />
+            app:destination="@id/passwordRecoveryFragment"
+            app:enterAnim="@anim/from_left"
+            app:popEnterAnim="@anim/from_right" />
         <action
             android:id="@+id/action_signInFragment_to_registrationFragment"
             app:destination="@id/registrationFragment"
+            app:enterAnim="@anim/from_right"
+            app:popEnterAnim="@anim/from_left"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
@@ -81,7 +89,9 @@
         android:label="ChatInfoFragment" >
         <action
             android:id="@+id/action_chatInfoFragment_to_userInfoFragment"
-            app:destination="@id/userInfoFragment" />
+            app:destination="@id/userInfoFragment"
+            app:enterAnim="@anim/from_right"
+            app:popEnterAnim="@anim/from_left" />
         <action
             android:id="@+id/action_chatInfoFragment_to_chatFragment2"
             app:destination="@id/chatFragment2" />
