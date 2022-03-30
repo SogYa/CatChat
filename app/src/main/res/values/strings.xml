@@ -11,7 +11,7 @@
     <string name="signin_password_recovery_button">Забыли пароль?</string>
     <string name="passwordrecovery_textview">Для востановления пароля введите почту привязанную к аккаунту. На нее будет выслано письмо с потверждением востановления пароля.</string>
     <string name="passwordrecovery_send_mail">Отправить сообщение</string>
-    <string name="version">ver 0.5.1</string>
+    <string name="version">ver 0.6</string>
     <string name="button_log_out">Выйти</string>
     <string name="chat_message_hint">Сообщение</string>
     <string name="button_change_password">Сменить пароль</string>
