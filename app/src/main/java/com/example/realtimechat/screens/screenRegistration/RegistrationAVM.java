@@ -1,8 +1,6 @@
 package com.example.realtimechat.screens.screenRegistration;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Intent;
 import android.net.Uri;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -16,17 +14,15 @@ import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenChat.MainActivity;
 
-public class RegistrationVM extends AndroidViewModel {
+public class RegistrationAVM extends AndroidViewModel {
 
     private final AuthRepo authRepo;
-    private final PhotoInstruments photoInstruments;
 
-    public RegistrationVM(@NonNull Application application) {
+    public RegistrationAVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
-        photoInstruments = new PhotoInstruments();
+        PhotoInstruments photoInstruments = new PhotoInstruments();
     }
 
     //Метод регистрации пользователя
@@ -40,31 +36,25 @@ public class RegistrationVM extends AndroidViewModel {
             authRepo.registration(email, password, new AuthRepo.DataListener<String>() {
                 @Override
                 public void data(String o) {
-                    authRepo.createNewUser(name, s -> {
-                        authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
-                                new AuthRepo.DataListener<Object>() {
-                                    @Override
-                                    public void data(Object o) {
-                                        authRepo.setImage(s);
-                                    }
+                    authRepo.createNewUser(name, s -> authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
+                            new AuthRepo.DataListener<Object>() {
+                                @Override
+                                public void data(Object o) {
+                                    authRepo.setImage(s);
+                                }
 
-                                    @Override
-                                    public void error(String error) {
-                                        Toast.makeText(getApplication(), error,
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                    });
+                                @Override
+                                public void error(String error) {
+                                    Toast.makeText(getApplication(), error,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }));
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, true);
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
                     SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AVATAR_CREATED, false);
-                    getApplication().startActivity(new Intent(getApplication(),
-                            MainActivity.class)
-                            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                                    | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    myCallBack.data("Success");
                     Toast.makeText(getApplication(), "Добро пожаловать!",
                             Toast.LENGTH_SHORT).show();
-
                 }
 
                 @Override
@@ -74,10 +64,6 @@ public class RegistrationVM extends AndroidViewModel {
                 }
             });
         }
-    }
-
-    public void setAvatar(Activity activity) {
-        photoInstruments.setImage(activity);
     }
 
     public void sendImage(Uri uri, ImageView imageView) {

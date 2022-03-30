@@ -2,38 +2,39 @@ package com.example.realtimechat.screens.screenSignIn;
 
 
 import android.app.Application;
-import android.content.Intent;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.MutableLiveData;
 
+import com.example.realtimechat.R;
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenChat.MainActivity;
-import com.example.realtimechat.screens.screenPasswordRecovery.PasswordRecoveryActivity;
-import com.example.realtimechat.screens.screenRegistration.RegistrationActivity;
 
-public class SignInVM extends AndroidViewModel {
+public class SignInAVM extends AndroidViewModel {
 
     private final AuthRepo authRepo;
     private int count = 0;
+    private final MutableLiveData<Integer> navigationLiveData;
 
-    public SignInVM(@NonNull Application application) {
+    public SignInAVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
+        navigationLiveData = new MutableLiveData<>();
     }
 
-    //Пеереход к экрану регистрации
+
+    //Пеереход к экрану регистрации(Временно не испольузется)
     public void goToRegistration() {
-        getApplication().startActivity(new Intent(getApplication(), RegistrationActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        navigationLiveData.postValue(R.id.action_signInFragment_to_registrationFragment);
     }
 
-    //Переход на экран востановлени пароля
+    //Переход на экран востановлени пароля(временно не используется)
     public void goToPasswordRecovery() {
-        getApplication().startActivity(new Intent(getApplication(), PasswordRecoveryActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        navigationLiveData.postValue(R.id.action_signInFragment_to_passwordRecoveryFragment);
     }
 
     //Вход в систему
@@ -50,7 +51,7 @@ public class SignInVM extends AndroidViewModel {
                         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, o);
                         myCallBack.data(true);
                         Toast.makeText(getApplication(), "С вовзращением!", Toast.LENGTH_SHORT).show();
-                        getApplication().startActivity(new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                        navigationLiveData.postValue(R.id.action_signInFragment_to_chatFragment2);
                     }
 
                     @Override
@@ -82,5 +83,9 @@ public class SignInVM extends AndroidViewModel {
                 count = 0;
                 break;
         }
+    }
+    //Navigation LiveData
+    public MutableLiveData<Integer> getNavigationLiveData() {
+        return navigationLiveData;
     }
 }

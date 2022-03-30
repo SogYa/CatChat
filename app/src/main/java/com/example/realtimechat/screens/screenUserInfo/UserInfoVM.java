@@ -1,23 +1,23 @@
 package com.example.realtimechat.screens.screenUserInfo;
 
-import android.app.Application;
 import android.widget.ImageView;
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
+
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.model.User;
 import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
+
 import io.reactivex.Completable;
 
-public class UserInfoVM extends AndroidViewModel {
+public class UserInfoVM extends ViewModel {
     private final AuthRepo authRepo;
     private final MutableLiveData<User> userInfo;
     private final PhotoInstruments photoInstruments;
 
-    public UserInfoVM(@NonNull Application application) {
-        super(application);
+    public UserInfoVM() {
         authRepo = new AuthRepo();
         userInfo = new MutableLiveData<>();
         photoInstruments = new PhotoInstruments();

@@ -2,7 +2,7 @@ package com.example.realtimechat.screens.screenChatInfo;
 
 
 import android.app.Application;
-import android.content.Intent;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -12,23 +12,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.realtimechat.datalayer.AuthRepo;
 import com.example.realtimechat.datalayer.model.User;
 import com.example.realtimechat.instruments.myCallBack;
-import com.example.realtimechat.screens.screenUserInfo.UserInfoActivity;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ChatInfoVM extends AndroidViewModel {
+public class ChatInfoAVM extends AndroidViewModel {
     private final ArrayList<User> mListUsers = new ArrayList<>();
     private final AuthRepo authRepo;
-    public ChatInfoVM(@NonNull Application application) {
+
+    public ChatInfoAVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
     }
 
-    public void initRecyclerView(RecyclerView recyclerView,  myCallBack<Boolean> myCallBack){
+    public void initRecyclerView(RecyclerView recyclerView, myCallBack<Object> myCallBack) {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplication());
-
-        UsersAdapter adapter = new UsersAdapter(getApplication(), mListUsers, (user, position) -> getApplication().startActivity(new Intent(getApplication(), UserInfoActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).putExtra("uid",user.getUid())));
+        UsersAdapter adapter = new UsersAdapter(getApplication(), mListUsers, (user, position) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("uid", user.getUid());
+            myCallBack.data(bundle);
+        });
 
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -39,5 +42,9 @@ public class ChatInfoVM extends AndroidViewModel {
             Objects.requireNonNull(recyclerView.getAdapter()).notifyItemChanged(1);
             myCallBack.data(true);
         });
+    }
+
+    public void clearRecyclerView() {
+        mListUsers.clear();
     }
 }

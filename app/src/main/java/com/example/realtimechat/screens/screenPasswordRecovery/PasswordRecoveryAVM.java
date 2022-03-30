@@ -6,11 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import com.example.realtimechat.datalayer.AuthRepo;
 
-public class PasswordRecoveryVM extends AndroidViewModel {
+public class PasswordRecoveryAVM extends AndroidViewModel {
 
     private final AuthRepo authRepo;
 
-    public PasswordRecoveryVM(@NonNull Application application) {
+    public PasswordRecoveryAVM(@NonNull Application application) {
         super(application);
         authRepo = new AuthRepo();
     }

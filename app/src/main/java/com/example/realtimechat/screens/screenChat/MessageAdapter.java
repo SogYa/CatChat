@@ -1,34 +1,35 @@
 package com.example.realtimechat.screens.screenChat;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.realtimechat.R;
 import com.example.realtimechat.datalayer.SPControl;
 import com.example.realtimechat.datalayer.model.Message;
 import com.example.realtimechat.instruments.Constants;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
-    private final LayoutInflater layoutInflater;
-    private final List<Message> messages;
 
-    MessageAdapter(Context context, ArrayList<Message> messages) {
-        this.layoutInflater = LayoutInflater.from(context);
-        this.messages = messages;
+    ArrayList<Message> messages;
+
+    MessageAdapter() {
+        this.messages = new ArrayList<>();
     }
 
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -54,6 +55,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         return messages.size();
     }
 
+    public void updateMessageList(final ArrayList<Message> userArrayList) {
+        this.messages.clear();
+        notifyItemChanged(1);
+        this.messages.addAll(userArrayList);
+        notifyItemRangeChanged(0, messages.size());
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
         final TextView messageView, timeView;
         final LinearLayout receiverView;
@@ -72,8 +80,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
             receiverMessageView = itemView.findViewById(R.id.receiver_message_text);
             receiverTimeView = itemView.findViewById(R.id.receiver_message_time);
             receiverNameView = itemView.findViewById(R.id.receiver_name);
-
         }
-
     }
 }

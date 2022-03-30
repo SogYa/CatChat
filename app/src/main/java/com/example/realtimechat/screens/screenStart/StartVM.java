@@ -2,25 +2,22 @@ package com.example.realtimechat.screens.screenStart;
 
 import static com.example.realtimechat.instruments.Constants.APP_PREFS_IS_AUTH;
 
-import android.app.Application;
-import android.content.Intent;
 import android.os.Handler;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.screens.screenChat.MainActivity;
-import com.example.realtimechat.screens.screenSignIn.SignInActivity;
+import com.example.realtimechat.instruments.NavigationConstants;
 
-public class StartVM extends AndroidViewModel {
+public class StartVM extends ViewModel {
 
     private final MutableLiveData<String> hintsData;
+    private final MutableLiveData<NavigationConstants> navigationLiveData;
 
-    public StartVM(@NonNull Application application) {
-        super(application);
+    public StartVM() {
         hintsData = new MutableLiveData<>();
+        navigationLiveData = new MutableLiveData<>();
         String[] hints = new String[]{
                 "Котика на логотипе зовут Марик",
                 "Лиля - самая милая кошка",
@@ -31,7 +28,8 @@ public class StartVM extends AndroidViewModel {
                 "Что такое красота? Дом, где два кота",
                 "Запускаем мурчало"
         };
-        hintsData.setValue(hints[(int) (Math.random()*7)]);
+        hintsData.setValue(hints[(int) (Math.random() * 7)]);
+         checkStatus();
     }
 
     public void checkStatus() {
@@ -40,9 +38,9 @@ public class StartVM extends AndroidViewModel {
         handler.postDelayed(() -> {
             //Проверка на авторизацию пользователя
             if (SPControl.getInstance().getBoolPrefs(APP_PREFS_IS_AUTH)) {
-                getApplication().getApplicationContext().startActivity(new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                navigationLiveData.postValue(NavigationConstants.CHAT);
             } else {
-                getApplication().getApplicationContext().startActivity(new Intent(getApplication(), SignInActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                navigationLiveData.postValue(NavigationConstants.LOGIN);
             }
         }, 1500);
     }
@@ -50,6 +48,7 @@ public class StartVM extends AndroidViewModel {
     public MutableLiveData<String> getHintsData() {
         return hintsData;
     }
+    public MutableLiveData<NavigationConstants> getNavigationLiveData(){return navigationLiveData;}
 }
 
 
