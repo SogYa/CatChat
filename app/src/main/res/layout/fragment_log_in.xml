@@ -33,6 +33,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:ems="10"
+            android:autofillHints=""
             android:hint="@string/auth_activity_email_hint"
 
             android:inputType="textEmailAddress"
@@ -52,6 +53,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:ems="10"
+            android:autofillHints=""
             android:hint="@string/auth_activity_password_hint"
             android:inputType="textPassword"
             android:minHeight="48dp" />
@@ -84,7 +86,6 @@
             android:layout_width="189dp"
             android:layout_height="37dp"
             android:background="#00FFFFFF"
-            android:onClick="onClickGoToRegistration"
             android:text="@string/login_activity_reg_button"
             android:textColor="#1FA810"
             android:textSize="12sp"
@@ -95,8 +96,7 @@
             android:layout_width="172dp"
             android:layout_height="42dp"
             android:background="#00FFFFFF"
-            android:onClick="onClickGoToPasswordRecovery"
-            android:text="@string/signin_password_recovery_button"
+            android:text="@string/login_password_recovery_button"
             android:textColor="#1FA810"
             android:textSize="12sp"
             app:iconTint="#00FFFFFF" />
@@ -118,7 +118,6 @@
             android:layout_width="311dp"
             android:layout_height="61dp"
             android:backgroundTint="#FFFFFF"
-            android:onClick="onClickLogIn"
             android:text="@string/auth_activity_signin_button"
             android:textColor="#1FA810"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -138,6 +137,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/login_cat_secret"
         app:srcCompat="@mipmap/ic_launcher_icon_round" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

@@ -32,7 +32,7 @@
             android:layout_marginEnd="2dp"
             android:minWidth="60dp"
             android:fontFamily="@font/tahoma"
-            android:text="timofey"
+
             android:textColor="#1FA810"
             android:textSize="12sp" />
 
@@ -70,8 +70,7 @@
                 android:layout_marginBottom="3dp"
                 android:fontFamily="@font/tahoma"
                 android:gravity="bottom|end"
-                android:text="12.40"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"

@@ -2,13 +2,16 @@
     <string name="app_name">CatChat</string>
     <string name="auth_activity_email_hint">example@example.com</string>
     <string name="auth_activity_password_hint">123456</string>
+    <string name="auth_activity_text_view_name">Имя</string>
+    <string name="auth_activity_hint_name">Имя</string>
     <string name="auth_activity_signin_button">Войти</string>
     <string name="auth_activity_reg_button">Зарегистрироваться</string>
     <string name="login_activity_reg_hint">Всё ещё не зарегистрированы?</string>
     <string name="login_activity_reg_button">Зарегистрироваться</string>
+    <string name="login_cat_secret">Cat secret</string>
+    <string name="login_password_recovery_button">Забыли пароль?</string>
     <string name="registration_textview_email">Адрес электронной почты</string>
     <string name="registration_textview_password">Пароль</string>
-    <string name="signin_password_recovery_button">Забыли пароль?</string>
     <string name="passwordrecovery_textview">Для востановления пароля введите почту привязанную к аккаунту. На нее будет выслано письмо с потверждением востановления пароля.</string>
     <string name="passwordrecovery_send_mail">Отправить сообщение</string>
     <string name="version">ver 0.6</string>
@@ -19,8 +22,6 @@
     <string name="textview_name">Имя:</string>
     <string name="textview_email">Email:</string>
     <string name="imageview_useravatar">UserAvatar</string>
-    <string name="auth_activity_text_view_name">Имя</string>
-    <string name="auth_activity_hint_name">Имя</string>
     <string name="settings_text">Настройки</string>
     <string name="about_chat_text">Пользователи</string>
     <string name="avatar_sign_in">Фото профиля</string>
