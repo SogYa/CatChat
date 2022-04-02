@@ -34,4 +34,5 @@
     <string name="menu_item_feed">Лента</string>
     <string name="menu_item_chat">Чат</string>
     <string name="menu_item_user">Профиль</string>
+    <string name="user_profile_hint_name">Имя</string>
 </resources>
