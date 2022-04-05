@@ -1,6 +1,5 @@
 package com.example.realtimechat.screens.screenChatInfo;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,31 +17,30 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
-    private final LayoutInflater layoutInflater;
-    private final List<User> users;
+
+    List<User> users;
     private final OnUserClickListener onClickListener;
     private final PhotoInstruments photoInstruments = new PhotoInstruments();
-
 
 
     interface OnUserClickListener {
         void onUserClick(User user, int position);
     }
 
-    public UsersAdapter(Context context, List<User> users, OnUserClickListener onClickListener) {
-        this.layoutInflater = LayoutInflater.from(context);
-        this.users = users;
+    public UsersAdapter(OnUserClickListener onClickListener) {
+        this.users = new ArrayList<>();
         this.onClickListener = onClickListener;
     }
 
     @NonNull
     @Override
     public UsersAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = layoutInflater.inflate(R.layout.users_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.users_list_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -80,5 +78,12 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
             userName = itemView.findViewById(R.id.textViewUserName);
             userStatus = itemView.findViewById(R.id.textViewUserStatus);
         }
+    }
+
+    public void updateUsersList(final ArrayList<User> userArrayList) {
+        this.users.clear();
+        notifyItemChanged(1);
+        this.users.addAll(userArrayList);
+        notifyItemRangeChanged(0, users.size());
     }
 }

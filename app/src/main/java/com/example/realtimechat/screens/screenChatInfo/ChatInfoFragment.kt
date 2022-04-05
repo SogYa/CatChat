@@ -8,12 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.realtimechat.R
 import com.example.realtimechat.databinding.FragmentChatInfoBinding
 
 class ChatInfoFragment : Fragment(R.layout.fragment_chat_info) {
+    private lateinit var adapter: UsersAdapter
     private lateinit var binding: FragmentChatInfoBinding
-    private lateinit var vm: ChatInfoAVM
+    private lateinit var vm: ChatInfoVM
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -25,23 +28,25 @@ class ChatInfoFragment : Fragment(R.layout.fragment_chat_info) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm = ViewModelProvider(this).get(ChatInfoAVM::class.java)
-        vm.initRecyclerView(binding.usersRecyclerView) {
-            binding.loadingLayoutUsers.visibility = GONE
-            if (it is Bundle) {
-                findNavController().navigate(R.id.action_chatInfoFragment_to_userInfoFragment, it)
-            } else if (it is Boolean) {
-                binding.loadingLayoutUsers.visibility = GONE
-            }
+
+        vm = ViewModelProvider(this).get(ChatInfoVM::class.java)
+
+        val linearLayoutManager = LinearLayoutManager(context)
+        binding.usersRecyclerView.layoutManager = linearLayoutManager
+
+        adapter = UsersAdapter { user, _ ->
+            val bundle = Bundle()
+            bundle.putString("uid", user.getUid())
+            findNavController().navigate(R.id.action_chatInfoFragment_to_userInfoFragment, bundle)
         }
+        binding.usersRecyclerView.adapter = adapter
 
-
+        vm.usersLiveData.observe(this.viewLifecycleOwner) {
+            adapter.updateUsersList(it)
+            binding.loadingLayoutUsers.visibility = GONE
+        }
         binding.buttonGoBack.setOnClickListener {
             findNavController().popBackStack()
         }
-    }
-    override fun onPause() {
-        super.onPause()
-        vm.clearRecyclerView()
     }
 }
