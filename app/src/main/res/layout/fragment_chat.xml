@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/TopBar"
@@ -115,7 +116,6 @@
             android:backgroundTint="#00FFFFFF"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:onClick="onClickSendMessage"
             app:icon="@drawable/ic_send_mail"
             app:iconGravity="top"
             app:iconSize="32dp"

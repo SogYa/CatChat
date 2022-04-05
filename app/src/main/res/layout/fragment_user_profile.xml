@@ -70,7 +70,7 @@
             />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
@@ -89,8 +89,10 @@
                 android:layout_height="50dp"
                 android:layout_margin="5dp"
                 android:ems="10"
+                android:hint="@string/user_profile_hint_name"
                 android:inputType="textPersonName"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:autofillHints="" />
 
             <TextView
                 android:id="@+id/textViewEmail"
@@ -107,7 +109,8 @@
                 android:ems="10"
                 android:enabled="false"
                 android:inputType="textEmailAddress"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:autofillHints="" />
 
         </LinearLayout>
     </LinearLayout>
