@@ -9,19 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 
 import com.bumptech.glide.Glide;
-import com.example.realtimechat.datalayer.AuthRepo;
-import com.example.realtimechat.datalayer.SPControl;
+import com.example.realtimechat.data.SPControl;
+import com.example.realtimechat.domain.FirebaseRepository;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.PhotoInstruments;
 import com.example.realtimechat.instruments.myCallBack;
 
 public class RegistrationAVM extends AndroidViewModel {
 
-    private final AuthRepo authRepo;
+    private final FirebaseRepository firebaseRepository;
 
     public RegistrationAVM(@NonNull Application application) {
         super(application);
-        authRepo = new AuthRepo();
+        firebaseRepository = new FirebaseRepository();
         PhotoInstruments photoInstruments = new PhotoInstruments();
     }
 
@@ -33,14 +33,14 @@ public class RegistrationAVM extends AndroidViewModel {
             Toast.makeText(getApplication(), "Ой-ой, вы что-то не заполнили(", Toast.LENGTH_SHORT).show();
             myCallBack.data(true);
         } else {
-            authRepo.registration(email, password, new AuthRepo.DataListener<String>() {
+            firebaseRepository.registration(email, password, new FirebaseRepository.DataListener<String>() {
                 @Override
                 public void data(String o) {
-                    authRepo.createNewUser(name, s -> authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
-                            new AuthRepo.DataListener<Object>() {
+                    firebaseRepository.createNewUser(name, s -> firebaseRepository.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)),
+                            new FirebaseRepository.DataListener<Object>() {
                                 @Override
                                 public void data(Object o) {
-                                    authRepo.setImage(s);
+                                    firebaseRepository.setImage(s);
                                 }
 
                                 @Override

@@ -1,4 +1,4 @@
-package com.example.realtimechat.datalayer.datamanager;
+package com.example.realtimechat.data.datamanager;
 
 import android.app.Activity;
 

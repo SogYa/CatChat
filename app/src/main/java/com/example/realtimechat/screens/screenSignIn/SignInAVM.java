@@ -9,20 +9,20 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.realtimechat.R;
-import com.example.realtimechat.datalayer.AuthRepo;
-import com.example.realtimechat.datalayer.SPControl;
+import com.example.realtimechat.data.SPControl;
+import com.example.realtimechat.domain.FirebaseRepository;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.myCallBack;
 
 public class SignInAVM extends AndroidViewModel {
 
-    private final AuthRepo authRepo;
+    private final FirebaseRepository firebaseRepository;
     private int count = 0;
     private final MutableLiveData<Integer> navigationLiveData;
 
     public SignInAVM(@NonNull Application application) {
         super(application);
-        authRepo = new AuthRepo();
+        firebaseRepository = new FirebaseRepository();
         navigationLiveData = new MutableLiveData<>();
     }
 
@@ -44,7 +44,7 @@ public class SignInAVM extends AndroidViewModel {
             Toast.makeText(getApplication(), "Заполните поля", Toast.LENGTH_SHORT).show();
             return;
         }
-        authRepo.signIn(email, password, new AuthRepo.DataListener<String>() {
+        firebaseRepository.signIn(email, password, new FirebaseRepository.DataListener<String>() {
                     @Override
                     public void data(String o) {
                         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, true);

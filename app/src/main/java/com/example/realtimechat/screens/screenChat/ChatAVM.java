@@ -20,9 +20,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.realtimechat.MainActivity;
 import com.example.realtimechat.R;
-import com.example.realtimechat.datalayer.AuthRepo;
-import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.datalayer.model.Message;
+import com.example.realtimechat.data.SPControl;
+import com.example.realtimechat.data.model.Message;
+import com.example.realtimechat.domain.FirebaseRepository;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
 
@@ -33,7 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ChatAVM extends AndroidViewModel {
-    private final AuthRepo authRepo;
+    private final FirebaseRepository firebaseRepository;
     private final String uid;
     private final NotificationManager notificationManager;
     private String userName;
@@ -45,11 +45,11 @@ public class ChatAVM extends AndroidViewModel {
     public ChatAVM(@NonNull Application application) {
         super(application);
         AppStatements.sendOnline();
-        authRepo = new AuthRepo();
+        firebaseRepository = new FirebaseRepository();
         messageMutableLiveData = new MutableLiveData<>();
         uid = SPControl.getInstance().getStringPrefs(Constants.APP_PREFS_USER_ID);
         if (SPControl.getInstance().getBoolPrefs(Constants.APP_PREFS_IS_AUTH)) {
-            authRepo.readUserFromDataBase(uid, user -> userName = user.name);
+            firebaseRepository.readUserFromDataBase(uid, user -> userName = user.name);
         }
         initList();
         notificationManager = (NotificationManager) getApplication().getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
@@ -60,7 +60,7 @@ public class ChatAVM extends AndroidViewModel {
         Intent intent = new Intent(getApplication(), MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplication(), 0, intent, PendingIntent.FLAG_MUTABLE);
         //Получение сообщений из базы данных
-        authRepo.getMessages(new AuthRepo.DataListener<Message>() {
+        firebaseRepository.getMessages(new FirebaseRepository.DataListener<Message>() {
             @RequiresApi(api = Build.VERSION_CODES.Q)
             @Override
             public void data(Message message) {
@@ -96,7 +96,7 @@ public class ChatAVM extends AndroidViewModel {
         //Проверка на заполненность сообщения
         if (messageText != null) {
             //Отправление сообщения в базу данных
-            authRepo.sendMessage(messageText,
+            firebaseRepository.sendMessage(messageText,
                     //Получение реалього времени по Москве
                     ZonedDateTime
                             .ofInstant(Clock.systemUTC().instant(), ZoneId.of("Europe/Moscow"))

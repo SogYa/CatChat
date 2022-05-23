@@ -11,9 +11,9 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.bumptech.glide.Glide;
 import com.example.realtimechat.R;
-import com.example.realtimechat.datalayer.AuthRepo;
-import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.datalayer.model.User;
+import com.example.realtimechat.data.SPControl;
+import com.example.realtimechat.data.model.User;
+import com.example.realtimechat.domain.FirebaseRepository;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.ImnstrumentsAlertDialog;
@@ -25,7 +25,7 @@ import java.util.Objects;
 
 public class UserProfileAVM extends AndroidViewModel {
 
-    private final AuthRepo authRepo;
+    private final FirebaseRepository firebaseRepository;
     private final FirebaseAuth mAuth;
     private final MutableLiveData<User> userInfo;
 
@@ -34,14 +34,14 @@ public class UserProfileAVM extends AndroidViewModel {
         super(application);
         userInfo = new MutableLiveData<>();
         mAuth = FirebaseAuth.getInstance();
-        authRepo = new AuthRepo();
+        firebaseRepository = new FirebaseRepository();
         PhotoInstruments photoInstruments = new PhotoInstruments();
 
     }
 
     //Метод получения ифнормации о пользователе
     public void checkUser() {
-        authRepo.readUserFromDataBase(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), value -> {
+        firebaseRepository.readUserFromDataBase(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), value -> {
             userInfo.postValue(value);
             SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_NAME, value.name);
         });
@@ -51,7 +51,7 @@ public class UserProfileAVM extends AndroidViewModel {
     public void logOut() {
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_IS_AUTH, false);
         SPControl.getInstance().updatePrefs(Constants.AVATAR_URI, "");
-        authRepo.logOut();
+        firebaseRepository.logOut();
         AppStatements.sendOffline();
         SPControl.getInstance().updatePrefs(Constants.APP_PREFS_USER_ID, "");
 
@@ -59,7 +59,7 @@ public class UserProfileAVM extends AndroidViewModel {
 
     //Метод востановки пароля
     public void passwordChange() {
-        authRepo.passwordChange(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail(), new AuthRepo.DataListener<Object>() {
+        firebaseRepository.passwordChange(Objects.requireNonNull(mAuth.getCurrentUser()).getEmail(), new FirebaseRepository.DataListener<Object>() {
             @Override
             public void data(Object o) {
                 Toast.makeText(getApplication(), "Письмо выслано на вашу эл. почту", Toast.LENGTH_SHORT).show();
@@ -75,7 +75,7 @@ public class UserProfileAVM extends AndroidViewModel {
     //Метод отправки сообщения в хранилище
     public void sendImage(Uri uri, ImageView imageView) {
         SPControl.getInstance().updatePrefs(Constants.AVATAR_URI, uri.toString());
-        authRepo.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)), new AuthRepo.DataListener<Object>() {
+        firebaseRepository.sendImageToStorage(Uri.parse(SPControl.getInstance().getStringPrefs(Constants.AVATAR_URI)), new FirebaseRepository.DataListener<Object>() {
             @Override
             public void data(Object o) {
                 updateAvatar(imageView, uri -> Toast.makeText(getApplication(), "Аватар успешно загружен.", Toast.LENGTH_SHORT).show());
@@ -90,7 +90,7 @@ public class UserProfileAVM extends AndroidViewModel {
 
     //Метод обновления аватара
     public void updateAvatar(ImageView imageView, myCallBack<Boolean> myCallBack) {
-        authRepo.downloadImage(Constants.STORAGE_PATH_TO_AVATAR, uriString ->
+        firebaseRepository.downloadImage(Constants.STORAGE_PATH_TO_AVATAR, uriString ->
                 Glide.with(getApplication().getApplicationContext())
                         .load(uriString)
                         .placeholder(R.mipmap.ic_deafault_avatar)
@@ -100,7 +100,7 @@ public class UserProfileAVM extends AndroidViewModel {
     }
 
     public void saveNewData(String name) {
-        authRepo.updateUserName(name);
+        firebaseRepository.updateUserName(name);
     }
 
     public void checkName(String name) {

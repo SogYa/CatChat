@@ -7,7 +7,7 @@ import android.os.Handler;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.realtimechat.datalayer.SPControl;
+import com.example.realtimechat.data.SPControl;
 import com.example.realtimechat.instruments.NavigationConstants;
 
 public class StartVM extends ViewModel {

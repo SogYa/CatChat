@@ -15,9 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import com.example.realtimechat.R
+import com.example.realtimechat.data.datamanager.RxData
+import com.example.realtimechat.data.model.User
 import com.example.realtimechat.databinding.FragmentUserProfileBinding
-import com.example.realtimechat.datalayer.datamanager.RxData
-import com.example.realtimechat.datalayer.model.User
 import com.example.realtimechat.instruments.MyActivityResultContract
 
 class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {

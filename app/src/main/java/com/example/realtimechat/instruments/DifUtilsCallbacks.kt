@@ -1,8 +1,8 @@
 package com.example.realtimechat.instruments
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.realtimechat.datalayer.model.Message
-import com.example.realtimechat.datalayer.model.User
+import com.example.realtimechat.data.model.Message
+import com.example.realtimechat.data.model.User
 
 class DifUtilsCallbacks {
 

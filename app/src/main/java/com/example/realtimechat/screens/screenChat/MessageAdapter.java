@@ -11,8 +11,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.realtimechat.R;
-import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.datalayer.model.Message;
+import com.example.realtimechat.data.SPControl;
+import com.example.realtimechat.data.model.Message;
 import com.example.realtimechat.instruments.Constants;
 
 import java.util.ArrayList;

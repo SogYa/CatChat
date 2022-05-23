@@ -1,4 +1,4 @@
-package com.example.realtimechat.datalayer;
+package com.example.realtimechat.data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ public class SPControl {
     private static final String APP_PREFS_NAME = "appPrefsName";
 
     //Класс который описывает управление префами - получить префы, обновить префы
-    private static SPControl SPControl = new SPControl();
+    private static final SPControl SPControl = new SPControl();
 
     public static SPControl getInstance() {
         return SPControl;

@@ -10,15 +10,11 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
-import com.example.realtimechat.datalayer.AuthRepo;
-import com.example.realtimechat.datalayer.SPControl;
-import com.example.realtimechat.datalayer.datamanager.RxData;
+import com.example.realtimechat.data.SPControl;
+import com.example.realtimechat.data.datamanager.RxData;
 import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.MyLifecycle;
-import com.example.realtimechat.instruments.myCallBack;
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 public class App extends Application implements Application.ActivityLifecycleCallbacks {
 

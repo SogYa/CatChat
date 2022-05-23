@@ -1,6 +1,6 @@
 package com.example.realtimechat.instruments;
 
-import com.example.realtimechat.datalayer.SPControl;
+import com.example.realtimechat.data.SPControl;
 
 public enum AppStatements {
     ONLINE("В сети"),

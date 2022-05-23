@@ -26,6 +26,7 @@ class StartFragment : Fragment(R.layout.fragment_start) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         val startVM = ViewModelProvider(this).get(StartVM::class.java)
         startVM.hintsData.observe(viewLifecycleOwner) { s: String? ->
             binding.textViewHint.text = s

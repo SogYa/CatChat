@@ -1,14 +1,11 @@
 package com.example.realtimechat.instruments;
 
 import com.example.realtimechat.app.App;
-import com.example.realtimechat.datalayer.model.User;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.realtimechat.data.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.util.Objects;
 
 public class Constants {
 

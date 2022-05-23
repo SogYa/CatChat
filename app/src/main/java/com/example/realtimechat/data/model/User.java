@@ -1,4 +1,4 @@
-package com.example.realtimechat.datalayer.model;
+package com.example.realtimechat.data.model;
 
 
 public class User {

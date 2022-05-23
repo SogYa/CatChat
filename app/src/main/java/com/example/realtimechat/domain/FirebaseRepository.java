@@ -1,4 +1,4 @@
-package com.example.realtimechat.datalayer;
+package com.example.realtimechat.domain;
 
 
 import android.net.Uri;
@@ -6,8 +6,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.realtimechat.datalayer.model.Message;
-import com.example.realtimechat.datalayer.model.User;
+import com.example.realtimechat.data.model.Message;
+import com.example.realtimechat.data.model.User;
 import com.example.realtimechat.instruments.Constants;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -19,7 +19,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.Objects;
 
-public class AuthRepo {
+public class FirebaseRepository {
 
     //Интерфейс коллбека
     public interface DataListener<T> {
@@ -33,7 +33,7 @@ public class AuthRepo {
     private final FirebaseDatabase mDat;
     private String photoUrl;
 
-    public AuthRepo() {
+    public FirebaseRepository() {
         this.fbAuthReference = FirebaseAuth.getInstance();
         mDat = FirebaseDatabase.getInstance();
     }
