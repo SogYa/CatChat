@@ -1,13 +1,17 @@
 package com.example.realtimechat
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class MainActivity : AppCompatActivity() {
-    //private lateinit var bottomNavigationView: BottomNavigationView
+    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var navController: NavController
 
@@ -19,12 +23,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        //bottomNavigationView = findViewById(R.id.bottomNavigationView)
+        bottomNavigationView = findViewById(R.id.bottomNavigationView)
         navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
-//        bottomNavigationView.setupWithNavController(navController)
-//        bottomNavigationView.selectedItemId = R.id.chatFragment2
+        bottomNavigationView.setupWithNavController(navController)
+        bottomNavigationView.selectedItemId = R.id.chatFragment2
+        navController.addOnDestinationChangedListener { _: NavController, navDestination: NavDestination, _: Bundle? ->
+            when (navDestination.id) {
+                R.id.chatFragment2 -> bottomNavigationView.visibility = View.INVISIBLE
+                else -> bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
     }
 
     override fun onBackPressed() {
