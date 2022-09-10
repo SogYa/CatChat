@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class MenuAdapter :
-    RecyclerView.Adapter<com.example.realtimechat.screens.screenMenu.MenuAdapter.ViewHolder>() {
+    RecyclerView.Adapter<MenuAdapter.ViewHolder>() {
 
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
