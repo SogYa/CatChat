@@ -2,16 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/feedFragment"
-        android:icon="@drawable/ic_cat_log"
+        android:icon="@drawable/ic_baseline_feed"
         android:title="@string/menu_item_feed" />
     <item
         android:id="@+id/menuFragment"
-        android:icon="@drawable/places_ic_search"
+        android:icon="@drawable/ic_baseline_menu"
         android:title="@string/menu_item_menu" />
-<!--    <item-->
-<!--        android:id="@+id/chatFragment2"-->
-<!--        android:icon="@drawable/ic_alpha_logo"-->
-<!--        android:title="@string/menu_item_chat" />-->
+    <!--    <item-->
+    <!--        android:id="@+id/chatFragment2"-->
+    <!--        android:icon="@drawable/ic_alpha_logo"-->
+    <!--        android:title="@string/menu_item_chat" />-->
     <item
         android:id="@+id/userProfileFragment2"
         android:icon="@drawable/ic_baseline_manage_accounts_24"
