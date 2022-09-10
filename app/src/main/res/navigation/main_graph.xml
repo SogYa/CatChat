@@ -104,4 +104,12 @@
             android:id="@+id/action_userInfoFragment_to_chatInfoFragment"
             app:destination="@id/chatInfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/feedFragment"
+        android:name="com.example.realtimechat.screens.screenFeed.FeedFragment"
+        android:label="FeedFragment" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.realtimechat.screens.screenMenu.MenuFragment"
+        android:label="MenuFragment" />
 </navigation>
