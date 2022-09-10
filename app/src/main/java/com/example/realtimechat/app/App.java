@@ -3,10 +3,7 @@ package com.example.realtimechat.app;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.ProcessLifecycleOwner;
 
@@ -16,7 +13,7 @@ import com.example.realtimechat.instruments.AppStatements;
 import com.example.realtimechat.instruments.Constants;
 import com.example.realtimechat.instruments.MyLifecycle;
 
-public class App extends Application implements Application.ActivityLifecycleCallbacks {
+public class App extends Application{
 
     //Класс App где проводим все важные иниты
 
@@ -53,39 +50,6 @@ public class App extends Application implements Application.ActivityLifecycleCal
                             AppStatements.sendOffline();
                     }
                 }));
-    }
-
-    @Override
-    public void onActivityCreated(@NonNull Activity activity, @Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onActivityStarted(@NonNull Activity activity) {
-    }
-
-    @Override
-    public void onActivityResumed(@NonNull Activity activity) {
-        // AppStatements.sendOnline();
-
-    }
-
-    @Override
-    public void onActivityPaused(@NonNull Activity activity) {
-        // AppStatements.sendOffline();
-    }
-
-    @Override
-    public void onActivityStopped(@NonNull Activity activity) {
-    }
-
-    @Override
-    public void onActivitySaveInstanceState(@NonNull Activity activity, @NonNull Bundle bundle) {
-
-    }
-
-    @Override
-    public void onActivityDestroyed(@NonNull Activity activity) {
     }
 }
 
