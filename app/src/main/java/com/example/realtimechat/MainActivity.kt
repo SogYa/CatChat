@@ -31,8 +31,9 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.selectedItemId = R.id.chatFragment2
         navController.addOnDestinationChangedListener { _: NavController, navDestination: NavDestination, _: Bundle? ->
             when (navDestination.id) {
-                R.id.chatFragment2 -> bottomNavigationView.visibility = View.INVISIBLE
-                else -> bottomNavigationView.visibility = View.VISIBLE
+                R.id.menuFragment, R.id.userProfileFragment2, R.id.feedFragment -> bottomNavigationView.visibility =
+                    View.VISIBLE
+                else -> bottomNavigationView.visibility = View.GONE
             }
         }
     }
