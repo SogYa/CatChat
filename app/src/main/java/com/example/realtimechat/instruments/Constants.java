@@ -17,6 +17,10 @@ public class Constants {
     public static final String APP_PREFS_USER_ID = "userId";
     public static final String APP_PREFS_IS_ACTIVE = "isActive";
     public static final int NOTIFY_ID = 10;
+    public static final String CATEOGRY_CHAT = "Чат";
+    public static final String CATEOGRY_CAT = "Питомец";
+    public static final String CATEOGRY_USERS = "Пользователи";
+    public static final String CATEOGRY_CARE = "Уход";
     public static final String APP_PREFS_IS_AVATAR_CREATED = "isCreated";
     public static final String CHANNEL_ID = "Message channel";
     public static final String NODE_USERS = "Users";
