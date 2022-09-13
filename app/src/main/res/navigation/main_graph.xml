@@ -103,6 +103,9 @@
         <action
             android:id="@+id/action_userInfoFragment_to_chatInfoFragment"
             app:destination="@id/chatInfoFragment" />
+        <action
+            android:id="@+id/action_userInfoFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
@@ -111,5 +114,9 @@
     <fragment
         android:id="@+id/menuFragment"
         android:name="com.example.realtimechat.screens.screenMenu.MenuFragment"
-        android:label="MenuFragment" />
+        android:label="MenuFragment" >
+        <action
+            android:id="@+id/action_menuFragment_to_chatFragment2"
+            app:destination="@id/chatFragment2" />
+    </fragment>
 </navigation>

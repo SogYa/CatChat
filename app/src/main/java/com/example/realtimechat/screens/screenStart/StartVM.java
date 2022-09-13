@@ -38,7 +38,7 @@ public class StartVM extends ViewModel {
         handler.postDelayed(() -> {
             //Проверка на авторизацию пользователя
             if (SPControl.getInstance().getBoolPrefs(APP_PREFS_IS_AUTH)) {
-                navigationLiveData.postValue(NavigationConstants.CHAT);
+                navigationLiveData.postValue(NavigationConstants.MENU);
             } else {
                 navigationLiveData.postValue(NavigationConstants.LOGIN);
             }
