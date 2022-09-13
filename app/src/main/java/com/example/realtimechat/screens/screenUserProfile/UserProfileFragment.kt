@@ -80,9 +80,6 @@ class UserProfileFragment : Fragment(R.layout.fragment_user_profile) {
             binding.imageViewAvatar.isEnabled = false
             binding.editTextUserName.isEnabled = false
         }
-        binding.buttonGoBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
         cropActivityResultLauncher = registerForActivityResult(cropActivityContract) {
             avm.sendImage(it, binding.imageViewAvatar)
         }
