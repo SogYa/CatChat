@@ -46,6 +46,7 @@
         <entry key="..\:/Users/Ghost/AndroidStudioProjects/RealTimeChat/app/src/main/res/mipmap-anydpi-v26/ic_logo_beta_round.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/Ghost/AndroidStudioProjects/RealTimeChat/app/src/main/res/xml/styles.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/drawable-hdpi/receiver_message_style.xml" value="0.122" />
+        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/drawable/ic_baseline_menu.xml" value="0.1" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/drawable/menu_list_item_background.xml" value="0.122" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/drawable/user_message_style.xml" value="0.122" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/activity_log_in.xml" value="0.20018115942028986" />
@@ -60,8 +61,8 @@
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_start.xml" value="0.21331521739130435" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_user_info.xml" value="0.3333333333333333" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/fragment_user_profile.xml" value="0.1" />
-        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/list_item.xml" value="0.7725118483412322" />
-        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/menu_list_item.xml" value="1.0" />
+        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/list_item.xml" value="0.14666666666666667" />
+        <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/menu_list_item.xml" value="0.6" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/layout/users_list_item.xml" value="0.4466666666666667" />
         <entry key="..\:/Users/ghost/AndroidStudioProjects/CatChat/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3333333333333333" />
       </map>
