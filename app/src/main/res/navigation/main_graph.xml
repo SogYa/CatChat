@@ -118,5 +118,8 @@
         <action
             android:id="@+id/action_menuFragment_to_chatFragment2"
             app:destination="@id/chatFragment2" />
+        <action
+            android:id="@+id/action_menuFragment_to_chatInfoFragment"
+            app:destination="@id/chatInfoFragment" />
     </fragment>
 </navigation>
