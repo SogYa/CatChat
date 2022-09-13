@@ -39,9 +39,7 @@ class ChatFragment : Fragment(R.layout.fragment_chat) {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = linearLayoutManager
 
-        binding.buttonProfile.setOnClickListener {
-            findNavController().navigate(R.id.action_chatFragment2_to_userProfileFragment2)
-        }
+
         binding.chatInfoBar.setOnClickListener {
             findNavController().navigate(R.id.action_chatFragment2_to_chatInfoFragment)
         }

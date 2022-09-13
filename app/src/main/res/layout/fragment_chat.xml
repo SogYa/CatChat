@@ -9,8 +9,8 @@
 
     <LinearLayout
         android:id="@+id/TopBar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:background="@drawable/text_border_bottom"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -28,16 +28,6 @@
             android:clickable="true"
             android:focusable="true"
             android:orientation="horizontal">
-
-            <ImageView
-                android:id="@+id/imageViewAvatarChatScreen"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="5dp"
-                android:contentDescription="@string/imageview_chat_avatar"
-                android:tintMode="screen"
-                app:srcCompat="@drawable/ic_cat_log"
-                tools:srcCompat="@drawable/ic_cat_log" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,18 +56,6 @@
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonProfile"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="5dp"
-            android:layout_weight="0"
-            android:background="#00FFFFFF"
-            app:icon="@drawable/ic_baseline_manage_accounts_24"
-            app:iconGravity="textEnd"
-            app:iconSize="40sp"
-            app:iconTint="#818181"
-            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
     <LinearLayout
