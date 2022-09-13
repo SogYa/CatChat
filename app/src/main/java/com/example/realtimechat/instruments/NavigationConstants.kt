@@ -5,6 +5,7 @@ import com.example.realtimechat.R
 enum class NavigationConstants(val destinationId: Int) {
 //    START,
     LOGIN(R.id.signInFragment),
+    MENU(R.id.menuFragment),
     REGISTRATION(R.id.registrationFragment),
     PASSWORDRECOVERY(R.id.passwordRecoveryFragment),
     CHAT(R.id.chatFragment2)
