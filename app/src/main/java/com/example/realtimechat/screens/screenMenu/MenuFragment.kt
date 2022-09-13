@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.realtimechat.R
 import com.example.realtimechat.data.model.MenuItem
 import com.example.realtimechat.databinding.FragmentMenuBinding
+import com.example.realtimechat.instruments.Constants
 
 class MenuFragment : Fragment(R.layout.fragment_menu), MenuAdapter.OnMenuItemClickListener {
     private lateinit var menuAdapter: MenuAdapter
@@ -43,8 +44,9 @@ class MenuFragment : Fragment(R.layout.fragment_menu), MenuAdapter.OnMenuItemCli
     }
 
     override fun onClick(menuItem: MenuItem, position: Int) {
-        when (menuItem.title) {
-            "Общий чат" -> findNavController().navigate(R.id.action_menuFragment_to_chatFragment2)
+        when (menuItem.category) {
+            Constants.CATEOGRY_CHAT -> findNavController().navigate(R.id.action_menuFragment_to_chatFragment2)
+            Constants.CATEOGRY_USERS -> findNavController().navigate(R.id.action_menuFragment_to_chatInfoFragment)
         }
     }
 }
